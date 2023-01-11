@@ -1,0 +1,118 @@
+﻿<div class="layui-card">
+    <div class="layui-card-header">
+        部门设置
+    </div>
+    <div class="layui-card-body">
+        <div class="layui-row" style="text-align:left">
+            <div class="layui-form-item">
+                <label class="layui-form-label">部门名称</label>
+                <div class="layui-input-block" style="width:320px">
+                    <input id="keyWordName" maxlength="32" required lay-verify="required" class="layui-input" placeholder="请输入部门名称" />
+                </div>
+            </div>
+            <button class="layui-btn" id="btnQuery">
+                <i class="layui-icon layui-icon-search"></i>
+                查询
+            </button>
+            <button class="layui-btn" id="btnadd">
+                <i class="layui-icon layui-icon-add-circle"></i>
+                添加
+            </button>
+            <button class="layui-btn" id="btnRefresh">
+                <i class="layui-icon layui-icon-refresh"></i>
+                刷新
+            </button>
+            <script type="text/html" id="toolbarDemo">
+                <div class="layui-btn-container">
+
+                    <button class="layui-btn layui-btn-sm" lay-event="getCheckLength" style="display: none">批量删除</button>
+
+                </div>
+            </script>
+            <table class="layui-hide" id="departmentTable" lay-filter="departmentTable"></table>
+        </div>
+    </div>
+</div>
+<style>
+    /* .layui-form-label {
+            width: 100px !important;
+            text-align: left !important;
+            padding-left: 0px;
+        }
+        .layui-form-item{
+            border:1px solid red;
+            display:flex;
+            align-content:center;
+        }
+        .layui-input-block {
+            margin-left: 95px !important;
+        }*/
+</style>
+@section head{
+    <script type="text/html" id="operationTpl">
+        <div>
+            <a class="layui-btn layui-btn-xs" lay-event="edit">
+                <i class="layui-icon layui-icon-edit"></i>编辑
+            </a>
+            @*<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">
+            <i class="layui-icon layui-icon-delete"></i>删除
+        </a>*@
+        </div>
+    </script>
+    <script type="text/html" id="department">
+        <div style="margin:15px 25px 0px 0px">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">部门名称</label>
+                    <div class="layui-input-block" style="width:515px">
+                        <input id="departmentName" maxlength="16"  required lay-verify="required" class="layui-input" placeholder="请输入部门名称" />
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">部门编号</label>
+                    <div class="layui-input-block" style="width:515px">
+                        <input id="departmentCode" maxlength="16"  required lay-verify="required" class="layui-input" placeholder="请输入部门编号" />
+                    </div>
+                </div>
+
+                 <div class="layui-form-item">
+                    <label class="layui-form-label">父级部门</label>
+                    @* <div class="layui-input-block" style="width:515px">
+                    <input id="parentId" maxlength="16"  required lay-verify="required" class="layui-input" placeholder="请输入部门编号" />
+                </div>*@
+                     <div class="layui-input-block" style="width:515px">
+                         <select id="parentId" lay-verify="required" lay-filter="department">
+                            <option value="0">请选择</option>
+                         </select>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">部门负责人</label>
+                    <div class="layui-input-block" style="width:515px">
+                        <input id="departmentManager" maxlength="16"  required lay-verify="required" class="layui-input" placeholder="请输入部门负责人" />
+                    </div>
+                </div>
+
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">联系电话</label>
+                    <div class="layui-input-block" style="width:515px">
+                        <input id="contactNumber" maxlength="16"  required lay-verify="required" class="layui-input" placeholder="请输入联系电话" />
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">&nbsp;&nbsp;&nbsp;&nbsp;简介</label>
+                    <div class="layui-input-block" style="width:515px">
+                        <input id="introduction" maxlength="200" class="layui-input" placeholder="请输入简介" />
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </script>
+
+    <script src="~/js/department.js?v=@DateTime.Now"></script>
+}
+

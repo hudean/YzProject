@@ -1,0 +1,248 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    @*<link rel="icon" href="~/lib/home_page/titleLogo.png" type="img/x-ico" />*@
+    <title>软件后台管理系统</title>  @*@ViewData["Title"] -*@
+    <link rel="stylesheet" href="~/lib/layui/css/layui.css" />
+    @*<link href="~/css/admin.css" rel="stylesheet" />*@
+    <link href="~/css/nprogress.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/layui/css/modules/layer/default/layer.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+</head>
+<body class="layui-layout-body">
+    <div class="layui-layout layui-layout-admin" style="background-color:#ffffff">
+
+        <div class="layui-header">
+
+            <div class="">
+                <div class="layui-logo">软件后台管理系统</div>
+                <!-- 头部区域（可配合layui已有的水平导航） -->
+                <ul class="layui-nav layui-layout-left">
+                    @* <li class="layui-nav-item"><a href="">控制台</a></li>
+                    <li class="layui-nav-item"><a href="">商品管理</a></li>
+                    <li class="layui-nav-item"><a href="">用户</a></li>
+                    <li class="layui-nav-item">
+                    <a href="javascript:;">其它系统</a>
+                    <dl class="layui-nav-child">
+                    <dd><a href="">邮件管理</a></dd>
+                    <dd><a href="">消息管理</a></dd>
+                    <dd><a href="">授权管理</a></dd>
+                    </dl>
+                    </li>*@
+                </ul>
+                <ul class="layui-nav layui-layout-right">
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">
+                            <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                            admin
+                        </a>
+                        @*   <dl class="layui-nav-child">
+                        <dd><a href="">基本资料</a></dd>
+                        <dd><a href="">安全设置</a></dd>
+                        </dl>*@
+                    </li>
+                    <li class="layui-nav-item"><a href="~/Account/Logout">退出</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="layui-side layui-bg-black">
+            <div class="layui-side-scroll">
+                <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+                <ul class="layui-nav layui-nav-tree" lay-filter="test" id="layuinavtree">
+                      @*   <li class="layui-nav-item"><a href="~/Home/Index">首页</a></li>*@
+                    @* <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">系统管理</a>
+                    <dl class="layui-nav-child">
+                    <dd><a href="~/User/Index">用户管理</a></dd>
+                    <dd><a href="~/Role/Index">角色管理</a></dd>
+                    <dd><a href="~/Permission/Index">权限管理</a></dd>
+                    <dd><a href="javascript:;">租户管理</a></dd>
+                    </dl>
+                    </li>*@
+                    @* <li class="layui-nav-item">
+                    <a href="javascript:;">系统管理</a>
+                    <dl class="layui-nav-child">
+                    <dd><a href="~/User/Index">用户管理</a></dd>
+                    <dd><a href="~/Department/Index">部门管理</a></dd>
+                    <dd><a href="~/Role/Index">角色管理</a></dd>
+                    <dd><a href="~/Menu/Index">菜单功能管理</a></dd>
+                    <dd><a href="~/ExcelExample/Index">Excel导入导出</a></dd>
+                    </dl>
+                    </li>*@
+
+                    @* <li class="layui-nav-item">
+                    <a href="javascript:;">信息管理</a>
+                    <dl class="layui-nav-child">
+                    <dd><a href="~/User/Index">文章管理</a></dd>
+                    <dd><a href="~/User/Index">课程管理</a></dd>
+                    <dd><a href="~/User/Index">课程目录管理</a></dd>
+                    <dd><a href="~/User/Index">信息反馈管理</a></dd>
+                    </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                    <a href="javascript:;">审核管理</a>
+                    <dl class="layui-nav-child">
+                    <dd><a href="~/User/Index">一级评论审核</a></dd>
+                    <dd><a href="~/SoftWare/Index">二级评论审核</a></dd>
+                    <dd><a href="~/WebSite/Index">文章审核</a></dd>
+                    <dd><a href="~/WebSite/Index">视频发布审核</a></dd>
+                    </dl>
+                    </li>*@
+
+                </ul>
+            </div>
+        </div>
+        <div class="layui-body">
+            <div class="layui-fluid">
+
+                @RenderBody()
+                @RenderSection("content", false)
+
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="border-top footer text-muted">
+        @* <div class="container">
+        &copy; 2022 - SinoPortalPlatform.WebMvc - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>*@
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/layui/layui.js"></script>
+    <script src="~/js/nprogress.js"></script>
+    <script src="~/lib/laydate/laydate.js"></script>
+    <script src="~/lib/vue/vue.js"></script>
+    <script src="~/lib/echarts/echarts.js"></script>
+    <script type="text/javascript">
+        //注意：导航 依赖 element 模块，否则无法进行功能性操作   
+        //动态菜单
+        $(document).ready(function () {
+        layui.use('element', function () {
+            var $ = layui.jquery;
+            var element = layui.element;
+            let userId = localStorage.getItem("loginUserId");
+            //获取所有的菜单
+            $.ajax({
+                type: "GET",
+                //url: "/Menu/GetMenuListAsync",
+                    url: "/Menu/GetMenuListByUserIdAsync?userId=" + userId,
+                //dataType: "json",
+                success: function (res) {
+                    //先添加所有的主材单
+                    //console.log(res);
+                    if (res.code == 0) {
+                        if (res.data) {
+                                $("#layuinavtree").empty();
+                            res.data.forEach(function (item, index) {
+                                let content = '<li class="layui-nav-item">';
+                                if (item.firstMenu.url == "") {
+                                    content += '<a href="javascript:;">' + item.firstMenu.menuName + "</a>";
+                                } else {
+                                    content += '<a href="' + item.firstMenu.url + '">' + item.firstMenu.menuName + "</a>";
+                                }
+                                //这里是添加所有的子菜单
+                                content += loadchild(item.childMenus);
+                                content += "</li>";
+                                $(".layui-nav-tree").append(content);
+                                   // $("#layuinavtree").append(content);
+                            });
+                            element.init();
+                            var url = GetUrlRelativePath();
+                            var patt1 = new RegExp(url);
+                            $(document.body).find('a').each(function (i, obj) {
+                                var str = $(obj).attr('href');
+                                if (patt1.test(str)) {
+                                    $(obj).parent().parent().parent().addClass("layui-nav-itemed");
+                                    $(obj).parent().addClass("layui-this");
+                                }
+                            });
+
+                        }
+                    }
+                },
+                error: function (jqXHR) {
+                    aler("发生错误：" + jqXHR.status);
+                }
+            });
+
+
+            //组装子菜单的方法
+            function loadchild(childMenus) {
+                var content = "";
+                if (childMenus != null && childMenus.length > 0) {
+                    content += '<dl class="layui-nav-child">';
+
+                    childMenus.forEach(function (item, index) {
+                        content += '<dd><a href="' + item.firstMenu.url + '">' + item.firstMenu.menuName + '</a></dd>';
+                    });
+                    content += '</dl>';
+                } else {
+                    content = '';
+                }
+
+                //console.log(content);
+                return content;
+            }
+
+
+            function GetUrlRelativePath() {
+                var url = document.location.toString();
+                var arrUrl = url.split("//");
+
+                var start = arrUrl[1].indexOf("/");
+                var relUrl = arrUrl[1].substring(start);// stop省略，截取从start开始到结尾的所有字符
+
+                if (relUrl.indexOf("?") != -1) {
+                    relUrl = relUrl.split("?")[0];
+                }
+                return relUrl;
+            }
+        });
+        });
+
+        //function GetUrlRelativePath() {
+        //    var url = document.location.toString();
+        //    var arrUrl = url.split("//");
+
+        //    var start = arrUrl[1].indexOf("/");
+        //    var relUrl = arrUrl[1].substring(start);// stop省略，截取从start开始到结尾的所有字符
+
+        //    if (relUrl.indexOf("?") != -1) {
+        //        relUrl = relUrl.split("?")[0];
+        //    }
+        //    return relUrl;
+        //}
+        ////静态菜单使用
+        //$(document).ready(function () {
+        //    var url = GetUrlRelativePath();
+        //    var patt1 = new RegExp(url);
+
+        //    //if (url == "/Home/Index")
+        //    //{
+        //    //    $("#home").attr("src", "/images/homeimg.png");
+        //    //    $("#homecss").addClass("homefont");
+        //    //}
+        //    //$(".layui-this").removeClass();
+        //    $(document.body).find('a').each(function (i, obj) {
+        //        var str = $(obj).attr('href');
+        //        if (patt1.test(str)) {
+        //            //debugger;
+        //            //$(obj).parent().parent().addClass("layui-nav-itemed");
+        //            $(obj).parent().parent().parent().addClass("layui-nav-itemed");
+        //            $(obj).parent().addClass("layui-this");
+        //        }
+        //    });
+
+        //});
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+    @RenderSection("head", false);
+</body>
+</html>

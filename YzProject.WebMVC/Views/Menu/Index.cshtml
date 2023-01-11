@@ -1,0 +1,137 @@
+﻿<div class="layui-card">
+    <div class="layui-card-header">
+        菜单功能按钮管理
+    </div>
+    <div class="layui-card-body">
+
+        <div class="layui-row" style="text-align:left">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">菜单名称</label>
+                        <div class="layui-input-block" style="width:515px">
+                            <input id="serachMenuName" maxlength="50" required lay-verify="required" class="layui-input" placeholder="请输入菜单名称" />
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">功能类型</label>
+                        <div class="layui-input-block" style="width:515px">
+                            <select id="serachFunctionType" lay-verify="required" lay-filter="serachFunctionType">
+                                <option value="">请选择</option>
+                                <option value="0">导航菜单</option>
+                                <option value="1">操作按钮</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <button class="layui-btn" id="btnQuery">
+                <i class="layui-icon layui-icon-search"></i>
+                查询
+            </button>
+            <button class="layui-btn" id="btnAdd">
+                <i class="layui-icon layui-icon-add-circle"></i>
+                添加
+            </button>
+            <button class="layui-btn" id="btnRefresh">
+                <i class="layui-icon layui-icon-refresh"></i>
+                刷新
+            </button>
+            <script type="text/html" id="toolbarDemo">
+                <div class="layui-btn-container">
+
+                    <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">批量删除</button>
+
+                </div>
+            </script>
+            <table class="layui-hide" id="menuTable" lay-filter="menuTable"></table>
+        </div>
+    </div>
+</div>
+@*<style>
+    .layui-form-label {
+        width: 77px !important;
+        text-align: left !important;
+        padding-left: 0px;
+    }
+
+    .layui-input-block {
+        margin-left: 95px !important;
+    }
+</style>*@
+@section head{
+    <script type="text/html" id="operationTpl">
+        <div>
+            <a class="layui-btn layui-btn-xs" lay-event="edit">
+                <i class="layui-icon layui-icon-edit"></i>编辑
+            </a>
+            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">
+                <i class="layui-icon layui-icon-delete"></i>删除
+            </a>
+        </div>
+    </script>
+    <script type="text/html" id="menuAddOrEdidForm">
+        <div style="margin:15px 25px 0px 0px">
+            <form class="layui-form">
+                 <div class="layui-form-item">
+                    <label class="layui-form-label">菜单编码</label>
+                    <div class="layui-input-block" style="width:515px">
+                        <input id="menuCode" maxlength="50"  required lay-verify="required" class="layui-input" placeholder="请输入菜单编码" />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">菜单名称</label>
+                    <div class="layui-input-block" style="width:515px">
+                        <input id="menuName" maxlength="50"  required lay-verify="required" class="layui-input" placeholder="请输入菜单名称" />
+                    </div>
+                </div>
+
+                 <div class="layui-form-item">
+                    <label class="layui-form-label">菜单图标</label>
+                    <div class="layui-input-block" style="width:515px">
+                        <input id="icon" maxlength="50"  class="layui-input" placeholder="请输入菜单图标" />
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">功能类型</label>
+                    <div class="layui-input-block" style="width:515px">
+                        <select id="menuType" lay-verify="required"  lay-filter="menuType">
+                            <option value="">请选择</option>
+                            <option value="0">导航菜单</option>
+                            <option value="1">操作按钮</option>
+                        </select>
+                    </div>
+                </div>
+                 <div class="layui-form-item">
+                    <label class="layui-form-label">序号</label>
+                    <div class="layui-input-block" style="width:515px">
+                        <input id="serialNumber" maxlength="6"  required lay-verify="required" class="layui-input" placeholder="请输入序号" />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">菜单地址</label>
+                    <div class="layui-input-block" style="width:515px">
+                        <input id="url" maxlength="255"  class="layui-input" placeholder="请输入医院地址" />
+                    </div>
+                </div>
+                 <div class="layui-form-item">
+                    <label class="layui-form-label">父级菜单</label>
+                    <div class="layui-input-block" style="width:515px">
+                        <select id="parentId"  lay-filter="parentId">
+                            <option value="">请选择</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">菜单备注</label>
+                    <div class="layui-input-block">
+                        <textarea id="remarks" maxlength="255"  type="text" placeholder="输入菜单备注" class="layui-textarea" style="width:515px"></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </script>
+
+    <script src="~/js/menu.js?V=@DateTime.Now"></script>
+}

@@ -1,0 +1,36 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "element-plus@2.2.13",
+      "destination": "wwwroot/lib/element-plus/"
+    },
+    {
+      "library": "element-ui@2.15.10",
+      "destination": "wwwroot/lib/element-ui/"
+    },
+    {
+      "library": "vue-i18n@9.2.2",
+      "destination": "wwwroot/lib/vue-i18n/"
+    },
+    {
+      "library": "axios@0.27.2",
+      "destination": "wwwroot/lib/axios/"
+    },
+    {
+      "library": "weui@2.5.14",
+      "destination": "wwwroot/lib/weui/"
+    },
+    {
+      "provider": "unpkg",
+      "library": "sass@1.55.0",
+      "destination": "wwwroot/lib/sass/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "vue@2.7.10",
+      "destination": "wwwroot/lib/vue/"
+    }
+  ]
+}

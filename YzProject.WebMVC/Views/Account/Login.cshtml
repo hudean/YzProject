@@ -1,0 +1,108 @@
+﻿@{
+    Layout = null;
+    ViewBag.Title = ViewBag.Title;
+}
+
+
+<html>
+<head>
+    @*<link rel="icon" href="~/lib/home_page/titleLogo.png" type="img/x-ico" />*@
+    <title>后台管理系统</title>
+    <link href="~/lib/layui/css/layui.css?v=1" rel="stylesheet" />
+    <link href="~/css/login.css" rel="stylesheet" />
+</head>
+<body class="login-bg">
+
+    <div class="login layui-anim layui-anim-up">
+        <div class="title">
+            <h2>后台管理系统</h2>
+            @*<img src="~/images/logo.png" />*@
+        </div>
+
+        <form class="layui-form" id="loginForm" asp-action="Login" method="post">
+            <div class="layui-form-item">
+            <label class="layui-form-label">用户名</label>
+                <div class="layui-input-block" style="width:200px">
+                    <input name="username" id="username" maxlength="16" placeholder="请输入用户名" type="text" lay-verify="required" class="layui-input" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">密&nbsp;&nbsp;&nbsp;&nbsp;码</label>
+                <div class="layui-input-block" style="width:200px">
+                    <input name="password" id="password" maxlength="16" placeholder="请输入密码" type="password" lay-verify="required" class="layui-input" />
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">验证码</label>
+                    <div class="layui-input-inline" style="width:100px">
+                        <input name="validateCode" id="validateCode" maxlength="6" placeholder="验证码" type="text" lay-verify="required" class="layui-input" width="100" />
+                    </div>
+                     <div class="layui-input-inline" style="width:100px">
+                        <img src="~/Account/CreateVerifyCode" id="imgVerifyCode" width="90" height="45">
+                    </div>
+                </div>
+            </div>
+             <input id="login" lay-submit value="登 录" lay-filter="login" style="width:260px;margin-left:50px;" class="layui-btn" type="button"  />
+           
+
+        </form>
+    </div>
+
+    <script src="~/lib/layui/layui.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script type="text/javascript">
+           $(function () {
+                $("#imgVerifyCode").click(function () {
+                    $("#imgVerifyCode").attr("src", "/Account/CreateVerifyCode?" + Math.random());
+                });
+                $("#imgVerifyCode").click();//为了避免页面刚打开的时候加载缓存中"/Main/CreateVerifyCode"
+                //因此要主动点击一下，刷新验证码
+            });
+        layui.use(['form', 'jquery', 'layer'], function () {
+                var form = layui.form;
+                var $ = layui.jquery;
+                var layer = layui.layer;
+                $("#username").focus();
+                $(document).keydown(function (event) {
+                    if (event.keyCode == 13) {
+                        document.getElementById("login").click();
+                    }
+                })
+                $("#login").click(function () {
+                    form.on('submit(login)', function () {
+                        var username = $("#username").val();
+                        var password = $("#password").val();
+                        var validateCode = $("#validateCode").val();
+                        $.ajax({
+                            url: '/Account/Login',
+                            type: 'post',
+                            data: {
+                                userName: username,
+                                password: password,
+                                validateCode: validateCode
+                            },
+                            success: function (res) {
+                                if (res.code == 0) {
+                                    //把用户信息存入缓存中
+                                    if(res.data){
+                                        localStorage.setItem("loginUserId",res.data.id)
+                                    }
+                                    //跳转
+                                    location.href = res.redirect;
+                                }
+                                else {
+                                    layer.msg(res.msg);
+                                }
+                            },
+                            error: function (res) {
+                            }
+                        })
+                    })
+                })
+            })
+    </script>
+</body>
+</html>

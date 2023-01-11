@@ -1,0 +1,361 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/lib/element-ui/theme-chalk/index.css" rel="stylesheet" />
+    @*    <script src="~/lib/sass/sass.js"></script>
+    <script src="~/lib/sass/sass.dart.js"></script>
+    <link href="~/lib/styles/index.scss" rel="stylesheet" />*@
+    <link href="~/css/reset-style.css" rel="stylesheet" />
+    <link href="~/css/scss-suger.css" rel="stylesheet" />
+    <link href="~/css/transition.css" rel="stylesheet" />
+    <title>Login</title>
+    <style>
+        /* $bg: #fbfcff;*/
+        /* $dark_gray: #333;
+                         $gray: #999;
+                         $light_gray: #eee;*/
+
+        .login-container {
+            height: 100vh;
+            position: relative;
+            overflow-y: hidden;
+            width: 100%;
+            /*background-color: $bg;*/
+            background-color: #fbfcff;
+        }
+
+            .login-container .login-form {
+                width: 360px;
+                padding: 40px 30px;
+                background: #fff;
+                box-shadow: 0px 4px 16px rgba(4, 61, 175, 0.15);
+                border-radius: 8px;
+                margin-right: 20vw;
+                z-index: 10;
+            }
+
+        @@media screen and (min-width: 769px) and (max-width: 992px) {
+
+            .login-form {
+                margin-right: 10vw;
+            }
+        }
+
+        @@media only screen and (max-width: 768px) {
+            .login-form {
+                margin-right: auto;
+                margin-left: auto;
+            }
+        }
+
+        .title-container .title {
+            font-size: 18px;
+            /* color: $dark_gray; */
+            color: #333;
+            margin: 0px auto 25px auto;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .login-hero {
+            width: 40vw;
+            position: absolute;
+            top: 50%;
+            left: 15vw;
+            z-index: 0;
+            transform: translateY(-50%);
+        }
+
+        @@media screen and (min-width: 769px) and (max-width: 992px) {
+            .login-hero {
+                width: 60vw;
+                left: 5vw;
+            }
+        }
+
+        @@media screen and (max-width: 768px) {
+            .login-hero {
+                width: 100vw;
+                left: 0;
+            }
+        }
+
+        .login-hero img {
+            width: 100%;
+        }
+
+        .svg-container {
+            padding-left: 16px;
+            /* color: $gray; */
+            color: #999;
+            text-align: center;
+            width: 30px;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /*错误提示信息*/
+        .tip-message {
+            color: #e4393c;
+            height: 30px;
+            margin-top: -12px;
+            font-size: 12px;
+        }
+
+        /* 登录按钮*/
+        .login-btn {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .show-pwd {
+            width: 50px;
+            font-size: 16px;
+            /*color: $gray;*/
+            color: #999;
+            cursor: pointer;
+            text-align: center;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+
+        /*//css 样式重置 增加个前缀避免全局污染*/
+        /*.login-container {
+
+                         }*/
+        .el-input__wrapper {
+            background-color: transparent;
+            box-shadow: none;
+        }
+
+        .el-form-item {
+            border: 1px solid #e0e0e0;
+            background: #fff;
+            border-radius: 4px;
+            color: #999;
+            &__content
+
+        {
+            position: relative;
+        }
+
+        }
+
+        .el-input input {
+            background: transparent;
+            border: 0px;
+            -webkit-appearance: none;
+            border-radius: 0px;
+            padding: 10px 5px 10px 35px;
+            color: #999;
+            height: 42px;
+            /*//此处调整item的高度*/
+            caret-color: #999;
+        }
+        /*
+                           //hiden the input border*/
+        .el-input__inner {
+            box-shadow: none !important;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div id="app">
+        <div class="login-container columnCE">
+            <div class="login-hero">
+                <img src="~/lib/assets/layout/login.svg" alt="Vue3 Admin Plus" />
+            </div>
+            <el-form class="login-form" :model="ruleForm" :rules="rules" ref="ruleForm" label-position="left">
+                <div class="title-container">
+                    <h3 class="title text-center">登录标题</h3>
+                </div>
+                <el-form-item prop="userName">
+                    @*   <span class="svg-container">
+                    <ElSvgIcon name="User" :size="14" />
+                    <svg-icon icon-class="user" />
+                    <i class="el-icon-user-solid" size="14" ></i>
+                    </span>*@
+                    <el-input prefix-icon="el-icon-user-solid" v-model="ruleForm.userName" ref="userName"></el-input>
+                </el-form-item>
+                <el-form-item prop="password">
+                    @* <span class="svg-container">
+                    <i class="el-icon-lock" size="14" ></i>
+                    </span>*@
+                    <el-input prefix-icon="el-icon-lock" type="password" v-model="ruleForm.password" ref="password" show-password></el-input>
+                </el-form-item>
+                <div class="tip-message">{{ tipMessage }}</div>
+                <el-button :loading="loading" type="primary" class="login-btn" size="default" v-on:click="handleLogin('ruleForm')">
+                    登录
+                </el-button>
+                @* <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
+                <el-button @click="resetForm('ruleForm')">重置</el-button>*@
+            </el-form>
+        </div>
+    </div>
+    <!-- 引入组件库 -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/vue.js"></script>
+    <script src="~/lib/axios/axios.min.js"></script>
+    @*<script src="https://unpkg.com/vue@2/dist/vue.js"></script>*@
+    <script src="~/lib/element-ui/index.min.js"></script>
+
+    <script type="text/javascript">
+        //https://v2.cn.vuejs.org/v2/guide/instance.html (vue官网)
+        //https://www.w3cschool.cn/vuejs2/
+        //https://www.cnblogs.com/xiegongzi/p/15782921.html
+        //https://www.runoob.com/w3cnote/vue2-start-coding.html
+        //http://axios-js.com/zh-cn/docs/ (axios中文网站)
+        $(function () {
+
+            // 创建一个新的 Vue 实例
+            var app = new Vue({
+                // DOM 元素，挂载视图模型
+                el: '#app',
+                // 定义属性，并设置初始值
+                data() {
+                    //categoryList: [{ id: 0, categoryName: "全部分类", sortNo: 0 }],
+                    //softList: [],
+                    //categoryId: 0,
+                    return {
+                        ruleForm: {
+                            userName: 'admin',
+                            password: 'sinomdt',
+                        },
+                        tipMessage: '',
+                        loading: false,
+                        rules: {
+                            userName: [
+                                { required: true, message: '请输入用户名称', trigger: 'blur' },
+                                { min: 3, max: 15, message: '长度在 3 到 15 个字符', trigger: 'blur' }
+                            ],
+                            password: [
+                                { required: true, message: '请输入密码', trigger: 'blur' },
+                                { min: 3, max: 15, message: '长度在 3 到 15 个字符', trigger: 'blur' }
+                            ]
+                        }
+                    }
+                },
+                watch: {
+                    //$route: {
+                    //    handler: function (route) {
+                    //        const query = route.query
+                    //        if (query) {
+                    //            this.redirect = query.redirect
+                    //            this.otherQuery = this.getOtherQuery(query)
+                    //        }
+                    //    },
+                    //    immediate: true
+                    //}
+                },
+                beforeCreate: function () {
+
+                },
+                created() {
+                    // window.addEventListener('storage', this.afterQRScan)
+                    var that = this;
+                    //that.categoryId = hidCategoryId;
+                    //that.currentPageIndex = hidPageIndex;
+                    //that.getAllCategorys();
+                }
+                ,
+                beforeMount: function () {
+
+                },
+                // 注意：mounted钩子函数的名字不能随便取，而且它不能写在methods属性。
+                mounted() {
+                    //获取焦点
+                    if (this.ruleForm.userName === '') {
+                        this.$refs.userName.focus()
+                    } else if (this.ruleForm.password === '') {
+                        this.$refs.password.focus()
+                    }
+                },
+                destroyed() {
+                    // window.removeEventListener('storage', this.afterQRScan)
+                },
+                methods: {
+                    showPwd() {
+                        if (this.passwordType === 'password') {
+                            this.passwordType = ''
+                        } else {
+                            this.passwordType = 'password'
+                        }
+                        this.$nextTick(() => {
+                            this.$refs.password.focus()
+                        })
+                    },
+                    handleLogin(formName) {
+                        this.$refs[formName].validate((valid) => {
+                            if (valid) {
+                                //https://developer.mozilla.org/zh-CN/docs/Web/API/Window/localStorage
+                                //1). 利用storage来对数据进行存储(sessionStorage、localStorage)
+                                //2). cookie
+                                //1、登录成功，保存token和刷新token等信息
+                                //console.log(this.ruleForm.userName);
+                                //axios.post('http://47.110.55.108:9200/api/User/valid', {
+                                //    UserName: this.ruleForm.userName,
+                                //    Password: this.ruleForm.password,
+                                //}).then(res => {
+                                //    console.log(res);
+                                //})
+                                const instance = axios.create({
+                                    baseURL: 'http://47.110.55.108:9200/api/',
+                                    timeout: 1000,
+                                    headers: { 'X-Custom-Header': 'foobar' }
+                                });
+                                instance.post('User/valid', this.ruleForm).then(res => {
+                                    console.log(res);
+                                    //JSON.stringify(obj);
+                                    //JSON.parse(str)
+                                    //设置
+                                    //localStorage.setItem('userInfo', JSON.stringify(res));
+                                    ////localStorage.userInfo = res;
+                                    ////sessionStorage.setItem('name', '李四');
+                                    ////获取
+                                    //console.log(localStorage.getItem('userInfo'));
+                                    ////删除
+                                    //localStorage.removeItem('userInfo');
+                                    //console.log(localStorage.getItem('userInfo'));
+                                    ////清除所有数据
+                                    //localStorage.clear()
+
+                                })
+                            } else {
+                                console.log('error handleLogin!!');
+                                return false;
+                            }
+                        });
+                    },
+                    submitForm(formName) {
+                        this.$refs[formName].validate((valid) => {
+                            if (valid) {
+                                alert('submit!');
+                            } else {
+                                console.log('error submit!!');
+                                return false;
+                            }
+                        });
+                    },
+                    resetForm(formName) {
+                        this.$refs[formName].resetFields();
+                    }
+                }
+            })
+        });
+    </script>
+</body>
+</html>

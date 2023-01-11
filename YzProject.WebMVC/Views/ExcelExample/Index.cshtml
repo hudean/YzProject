@@ -1,0 +1,155 @@
+﻿<style>
+    /*  .layui-form-label {
+                            width: 77px !important;
+                            text-align: left !important;
+                            padding-left: 0px;
+                        }
+
+                        .layui-input-block {
+                            margin-left: 95px !important;
+                        }*/
+
+</style>
+
+<div class="layui-card">
+    <div class="layui-card-header">
+        Excel导入导出
+    </div>
+    <div class="layui-card-body">
+        <div class="layui-row" style="text-align:left">
+            @* <form id="teamForm" action="/ExcelExample/ExportExecelAsync">*@
+            <form class="layui-form" id="doExportFile" asp-controller="ExcelExample" asp-action="ExportExecelAsync" method="post">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">姓名/身份证号</label>
+                        <div class="layui-input-block" style="width:515px">
+                            <input id="titleSearch" maxlength="32" required lay-verify="required" class="layui-input" placeholder="请输入姓名/身份证号" />
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label">日期范围</label>
+                        <div class="layui-inline" id="test6">
+                            <div class="layui-input-inline">
+                                <input type="text" autocomplete="off" id="startTimeSearch" class="layui-input" placeholder="开始日期">
+                            </div>
+                            <div class="layui-form-mid">-</div>
+                            <div class="layui-input-inline">
+                                <input type="text" autocomplete="off" id="endTimeSerch" class="layui-input" placeholder="结束日期">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               @* <button class="layui-btn " onclick="exportFile()">
+                    <i class="layui-icon layui-icon-export"></i>
+                    Excel导出
+                </button>
+                <input type="submit" value="提交" />*@
+            </form>
+            <button class="layui-btn " id="btnQuery">
+                <i class="layui-icon layui-icon-search"></i>
+                查询
+            </button>
+            <button class="layui-btn " id="btnAdd">
+                <i class="layui-icon layui-icon-add-circle"></i>
+                添加
+            </button>
+            <button class="layui-btn " id="btnRefresh">
+                <i class="layui-icon layui-icon-refresh"></i>
+                刷新
+            </button>
+            <button class="layui-btn " id="btnImport">
+                <i class="layui-icon layui-icon-upload-drag"></i>
+                Excel导入
+            </button>
+            <button class="layui-btn " id="btnExport">
+                <i class="layui-icon layui-icon-export"></i>
+                Excel导出
+            </button>
+            <script type="text/html" id="toolbarDemo">
+                <div class="layui-btn-container">
+
+                    <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">批量删除</button>
+
+                </div>
+            </script>
+
+            <table class="layui-hide" id="excelExampleTable" lay-filter="excelExampleTable">
+            </table>
+        </div>
+    </div>
+</div>
+
+@section head{
+    <script type="text/html" id="operationTpl">
+        <div>
+            <a class="layui-btn layui-btn-xs" lay-event="edit">
+                <i class="layui-icon layui-icon-edit"></i>编辑
+            </a>
+            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">
+                <i class="layui-icon layui-icon-delete"></i>删除
+            </a>
+
+        </div>
+    </script>
+    <script type="text/html" id="addOoEditPopUpLayer">
+        <div style="margin:15px 25px 0px 0px">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">姓名</label>
+                    <div class="layui-input-block" style="width:515px">
+                        <input id="name"  maxlength="32" required lay-verify="required" class="layui-input" placeholder="请输入姓名" />
+                    </div>
+                     <span class="layui-form-lable" style="position:absolute;right:60px;top:25px;width:55px;">
+                             <span id="nameNum">0</span>/32
+                     </span>
+                </div>
+
+                 <div class="layui-form-item">
+                    <label class="layui-form-label">身份证号码</label>
+                    <div class="layui-input-block" style="width:515px">
+                        <input id="identityCardCode"  maxlength="18" required lay-verify="required" class="layui-input" placeholder="请输入身份证号码" />
+                    </div>
+                </div>
+
+                 <div class="layui-form-item">
+                    <label class="layui-form-label">年龄</label>
+                    <div class="layui-input-block" style="width:515px">
+                        <input id="age"  maxlength="3" required lay-verify="required" class="layui-input" placeholder="请输入年龄" />
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">描述</label>
+                    <div class="layui-input-block">
+                         <textarea id="description" name="description" maxlength="255" style="width:515px;height:150px;" onkeyup="setLength(this,255,'numbers')"></textarea>
+                         <span class="layui-form-lable" style="position:absolute;right:50px;top:125px;width:55px;">
+                             <span id="numbers">0</span>/255
+                         </span>
+                        @* <div class="layui-upload-list">
+                                还可以输入<span style="font-family: Georgia; font-size: 26px;" id="wordCheck">255</span>个汉字
+                           </div>*@
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </script>
+
+    <script src="~/js/excelExample.js?v=@DateTime.Now"></script>
+    <script>
+        function setLength(obj, maxLength, elementId) {
+            //let num = maxLength - obj.value.length;
+            let num = obj.value.length;
+            let leng = elementId;
+            if (num < 0) {
+                num = 0;
+            }
+            document.getElementById(leng).innerHTML = num;
+        }
+        //也可以使用表单的形式提交
+        function exportFile() {
+            $("#doExportFile").submit();
+        }
+    </script>
+}

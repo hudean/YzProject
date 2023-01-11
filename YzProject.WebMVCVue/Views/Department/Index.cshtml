@@ -1,0 +1,104 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+<div id="main878" style="width:100%;height:100%;">
+    <el-card class="box-card m-4" shadow="hover">
+        <el-form :inline="true"
+                 :model="formQuery"
+                 class="demo-form-inline">
+            <el-form-item>
+                <el-button type="primary" @@click="handleAdd()">添加</el-button>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="primary" @@click="handleUpdate()">修改</el-button>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="primary" @@click="handleDelete()">删除</el-button>
+            </el-form-item>
+
+            <el-form-item label="部门名称">
+                <el-input v-model="formQuery.keyWordName"
+                          placeholder="请输入部门名称"
+                          clearable />
+            </el-form-item>
+
+            <el-form-item>
+                <el-button type="primary" @@click="onSearch()">查询</el-button>
+            </el-form-item>
+        </el-form>
+
+    </el-card>
+
+
+</div>
+
+@section head{
+    <script type="text/javascript">
+        //$(function () {
+
+        //})
+        //var app2 = new Vue({
+        //    el: '#app',
+        //    data: {
+        //        message: 'Hello Vue!',
+        //        formQuery: {
+        //            keyWordName: ""
+        //        }
+        //    },
+        //    methods: {
+        //        handleAdd() {
+        //            console.log('handleSelect', key, keyPath);
+        //        },
+        //        handleUpdate() {
+        //            console.log('handleSelect', key, keyPath);
+        //        },
+        //        handleDelete() {
+        //            console.log('handleSelect', key, keyPath);
+        //        },
+        //        onSearch() {
+        //            console.log('onSearch', formQuery.keyWordName);
+        //        },
+        //    }
+        //})
+        var app = new Vue({
+            el: '#app',
+            data: function () {
+                return {
+                    defaultActive: "1",
+                    isCollapse: false,
+                    asideWidth: "230px",
+                    formQuery: {
+                        keyWordName: ""
+                    }
+                    //tabIndex: 1
+                }
+            },
+            computed: {
+                //添加属性计算 在computed里添加属性计算。记住 scrollerHeight 不需在data进行声明。
+                scrollerWidth: function () {
+                    return this.asideWidth;
+                }
+            },
+            methods: {
+                menuToggleClick(key, keyPath) {
+                    this.isCollapse = !this.isCollapse;
+                    this.asideWidth = 'auto'  //修改成功，这种方式相当于直接修改html上的值，会重新渲染
+                    console.log(this.asideWidth);
+                    console.log('toggleClick', key, keyPath);
+                },
+                handleAdd() {
+                    console.log('handleAdd');
+                },
+                handleUpdate() {
+                    console.log('handleUpdate');
+                },
+                handleDelete() {
+                    console.log('handleDelete');
+                },
+                onSearch() {
+                    console.log('onSearch', this.formQuery.keyWordName);
+                },
+            }
+        })
+    </script>
+}

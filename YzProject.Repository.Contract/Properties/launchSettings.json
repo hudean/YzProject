@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "YzProject.Repository.Contract": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:63842;http://localhost:63843"
+    }
+  }
+}

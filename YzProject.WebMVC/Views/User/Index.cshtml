@@ -1,0 +1,171 @@
+﻿
+<div class="layui-card">
+    <div class="layui-card-header">
+        用户管理
+    </div>
+    <div class="layui-card-body">
+        <div class="layui-row" style="text-align:left">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">用户名称</label>
+                        <div class="layui-input-block" style="width:515px">
+                            <input id="titleSearch" maxlength="32" required lay-verify="required" class="layui-input" placeholder="请输入用户名称" />
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+            <button class="layui-btn " id="btnQuery">
+                <i class="layui-icon layui-icon-search"></i>
+                查询
+            </button>
+            <button class="layui-btn " id="btnadd">
+                <i class="layui-icon layui-icon-add-circle"></i>
+                添加
+            </button>
+            <button class="layui-btn " id="btnRefresh">
+                <i class="layui-icon layui-icon-refresh"></i>
+                刷新
+            </button>
+
+            <script type="text/html" id="toolbarDemo">
+                <div class="layui-btn-container">
+
+                    <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">批量删除</button>
+
+                </div>
+            </script>
+
+            <table class="layui-hide" id="userTable" lay-filter="userTable">
+            </table>
+        </div>
+    </div>
+</div>
+
+@section head{
+    <script type="text/html" id="operationTpl">
+        <div>
+            <a class="layui-btn layui-btn-xs" lay-event="edit">
+                <i class="layui-icon layui-icon-edit"></i>编辑
+            </a>
+            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">
+                <i class="layui-icon layui-icon-delete"></i>删除
+            </a>
+             <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="editPassWord">
+                <i class="layui-icon layui-icon-edit"></i>修改密码
+            </a>
+                   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="setRole">
+                    <i class="layui-icon layui-icon-auz"></i>配置角色
+                </a>
+        </div>
+    </script>
+    <script type="text/html" id="user">
+        <div style="margin:15px 25px 0px 0px">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">用户名称</label>
+                    <div class="layui-input-block" style="width:515px">
+                        <input id="userName"  maxlength="32" required lay-verify="required" class="layui-input" placeholder="请输入用户名称" />
+                    </div>
+                </div>
+                 <div class="layui-form-item">
+                    <label class="layui-form-label">用户密码</label>
+                    <div class="layui-input-block" style="width:515px">
+                        <input id="passWord" type="password"  maxlength="32" required lay-verify="required" class="layui-input" placeholder="请输入用户密码" />
+                    </div>
+                </div>
+
+                 <div class="layui-form-item" >
+                    <label class="layui-form-label">确认密码</label>
+                    <div class="layui-input-block" style="width:515px">
+                        <input id="confirmPassword"  type="password" maxlength="32" required lay-verify="required" class="layui-input" placeholder="请输入确认密码" />
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">&nbsp;&nbsp;用户头像</label>
+                    <div class="layui-input-block" style="width:515px">
+                        <div class="layui-upload">
+                            <button type="button" class="layui-btn" id="imgUpload">上传图片</button>
+                            <button id="hideUpload" type="button" style="display: none"></button>
+                            <span style="font-size:14px;color:red;margin-left:10px;">建议上传200 * 200大小图片(支持png、jpg、bmp、gif格式)</span>
+                            <div class="layui-upload-list">
+                                <img class="layui-upload-img" style="max-width:100%;height:auto;" id="hardImgUrl">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </script>
+
+
+    <script type="text/html" id="userEdit">
+        <div style="margin:15px 25px 0px 0px">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">用户名称</label>
+                    <div class="layui-input-block" style="width:515px">
+                        <input id="userName"  maxlength="32" required lay-verify="required" class="layui-input" placeholder="请输入用户名称" />
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">&nbsp;&nbsp;用户头像</label>
+                    <div class="layui-input-block" style="width:515px">
+                        <div class="layui-upload">
+                            <button type="button" class="layui-btn" id="imgUpload">上传图片</button>
+                            <button id="hideUpload" type="button" style="display: none"></button>
+                            <span style="font-size:14px;color:red;margin-left:10px;">建议上传200 * 200大小图片(支持png、jpg、bmp、gif格式)</span>
+                            <div class="layui-upload-list">
+                                <img class="layui-upload-img" style="max-width:100%;height:auto;" id="hardImgUrl">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </script>
+
+    <script type="text/html" id="userEditPassWord">
+        <div style="margin:15px 25px 0px 0px">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">用户密码</label>
+                    <div class="layui-input-block" style="width:515px">
+                        <input id="passWord" type="password"  maxlength="32" required lay-verify="required" class="layui-input" placeholder="请输入用户密码" />
+                    </div>
+                </div>
+
+                 <div class="layui-form-item" >
+                    <label class="layui-form-label">确认密码</label>
+                    <div class="layui-input-block" style="width:515px">
+                        <input id="confirmPassword"  type="password" maxlength="32" required lay-verify="required" class="layui-input" placeholder="请输入确认密码" />
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </script>
+
+    <script type="text/html" id="setRoleHtml">
+        <form class="layui-form" action="" id="setRoleFrom" style="margin-top:10px;margin-left:30px;">
+          @*  <div class="layui-form-item">
+                <input type="checkbox" name="" title="写作" lay-skin="primary" checked>
+                <input type="checkbox" name="" title="发呆" lay-skin="primary">
+                <input type="checkbox" name="" title="禁用" lay-skin="primary" disabled>
+                 <input type="checkbox" name="" title="写作" lay-skin="primary" checked>
+                <input type="checkbox" name="" title="发呆" lay-skin="primary">
+                <input type="checkbox" name="" title="禁用" lay-skin="primary" disabled>
+                 <input type="checkbox" name="" title="写作" lay-skin="primary" checked>
+                <input type="checkbox" name="" title="发呆" lay-skin="primary">
+            </div>*@
+        </form>
+    </script>
+
+
+    <script src="~/js/user.js?v=@DateTime.Now"></script>
+}

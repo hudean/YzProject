@@ -1,0 +1,127 @@
+﻿<style>
+    /*  .layui-form-label {
+                    width: 77px !important;
+                    text-align: left !important;
+                    padding-left: 0px;
+                }
+
+                .layui-input-block {
+                    margin-left: 95px !important;
+                }*/
+
+</style>
+
+<div class="layui-card">
+    <div class="layui-card-header">
+        角色管理
+    </div>
+    <div class="layui-card-body">
+        <div class="layui-row" style="text-align:left">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">角色名称</label>
+                        <div class="layui-input-block" style="width:515px">
+                            <input id="titleSearch" maxlength="32" required lay-verify="required" class="layui-input" placeholder="请输入角色名称" />
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+            <button class="layui-btn " id="btnQuery">
+                <i class="layui-icon layui-icon-search"></i>
+                查询
+            </button>
+            <button class="layui-btn " id="btnadd">
+                <i class="layui-icon layui-icon-add-circle"></i>
+                添加
+            </button>
+            <button class="layui-btn " id="btnRefresh">
+                <i class="layui-icon layui-icon-refresh"></i>
+                刷新
+            </button>
+
+            <script type="text/html" id="toolbarDemo">
+                <div class="layui-btn-container">
+
+                    <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">批量删除</button>
+
+                </div>
+            </script>
+
+            <table class="layui-hide" id="roleTable" lay-filter="roleTable">
+            </table>
+        </div>
+    </div>
+</div>
+
+@section head{
+<script type="text/html" id="operationTpl">
+    <div>
+        <a class="layui-btn layui-btn-xs" lay-event="edit">
+            <i class="layui-icon layui-icon-edit"></i>编辑
+        </a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">
+            <i class="layui-icon layui-icon-delete"></i>删除
+        </a>
+         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="setPermissions">
+            <i class="layui-icon layui-icon-auz"></i>配置权限
+        </a>
+    </div>
+</script>
+<script type="text/html" id="addOrEditForm">
+    <div style="margin:15px 25px 0px 0px">
+        <form class="layui-form">
+            <div class="layui-form-item">
+                <label class="layui-form-label">角色名称</label>
+                <div class="layui-input-block" style="width:515px">
+                    <input id="roleName"  maxlength="32" required lay-verify="required" class="layui-input" placeholder="请输入角色名称" />
+                </div>
+                 <span class="layui-form-lable" style="position:absolute;right:60px;top:25px;width:55px;">
+                         <span id="webSiteNameNum">0</span>/32
+                 </span>
+            </div>
+
+            @* <div class="layui-form-item">
+                <label class="layui-form-label">角色编号</label>
+                <div class="layui-input-block" style="width:515px">
+                    <input id="roleCode"  maxlength="32" required lay-verify="required" class="layui-input" placeholder="请输入角色编号" />
+                </div>
+            </div>*@
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">角色描述</label>
+                <div class="layui-input-block">
+                     <textarea id="roleDescription" name="roleDescription" maxlength="255" style="width:515px;height:150px;" onkeyup="setLength(this,255,'numbers')"></textarea>
+                     <span class="layui-form-lable" style="position:absolute;right:50px;top:125px;width:55px;">
+                         <span id="numbers">0</span>/255
+                     </span>
+                      @* <div class="layui-upload-list">
+                                    还可以输入<span style="font-family: Georgia; font-size: 26px;" id="wordCheck">255</span>个汉字
+                               </div>*@
+                </div>
+            </div>
+
+        </form>
+    </div>
+</script>
+
+<script type="text/html" id="configurePermissionsForm">
+        <div id="test12" class="demo-tree-more"></div>
+</script>
+
+<script src="~/js/role.js?v=@DateTime.Now"></script>
+<script>
+    function setLength(obj, maxLength, elementId) {
+               //let num = maxLength - obj.value.length;
+               let num = obj.value.length;
+               let leng = elementId;
+               if (num < 0) {
+                   num = 0;
+               }
+               document.getElementById(leng).innerHTML = num;
+    }
+</script>
+@*<script src="~/lib/kindeditor/kindeditor-all.js?v=7"></script>
+    <script src="~/lib/kindeditor/lang/zh-CN.js"></script>*@
+}

@@ -1,0 +1,171 @@
+﻿html {
+    background-color: #f2f2f2;
+}
+
+.layui-fluid {
+    padding: 0px;
+}
+
+.layui-layout-admin .layui-body {
+    bottom: 0;
+}
+
+.layui-nav-tree .layui-nav-child dd.layui-this, .layui-nav-tree .layui-nav-child dd.layui-this a, .layui-nav-tree .layui-this, .layui-nav-tree .layui-this > a, .layui-nav-tree .layui-this > a:hover  div{
+    background-color: #f27cb4 !important;
+    /*background: url(../Images/havebj.png);*/
+    color:#ffffff;
+}
+.layui-nav-itemed > .layui-nav-child {
+    background-color: #f0d6e2;
+    height:50px;
+   
+}
+
+
+.layui-nav-tree .layui-nav-child a {
+    color: #666666; padding-left: 26px;
+}
+.layui-nav-itemed a:active {
+    /*! color:#fff!important; */
+    color: #666666
+}
+.layui-nav-itemed > a,
+.layui-nav-tree .layui-nav-title a,
+.layui-nav-tree .layui-nav-title a:hover {
+    /*! color:#fff!important; */
+    color: #666666
+}
+.layui-nav-item a:hover {
+    background-color: #f27cb4
+}
+.layui-card-header .layui-button-tips {
+    position: absolute;
+    right: 15px;
+    top: 6px;
+}
+.homesize {
+    color:#808080;
+}
+.mesagelist {
+    clear: both;
+    font-size: 14px;
+    padding-top: 15px;
+    color:#333333;
+}
+    .mesagelist ul {
+        width: 85%; margin:0 auto;
+    }
+    .mesagelist ul li {
+        width: 93px;
+        float: left;
+        line-height:30px;
+    }
+.mesagelisthaver {
+    background-color: #FEE4F0;
+    width: 85%; height:30px;
+}
+
+.djbj {
+    background: url(../images/ty.png);
+    color: #ffffff;
+}
+.layui-layout-admin .layui-logo {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 200px;
+    height: 90px;
+    line-height: 60px;
+    text-align: center;
+    color: #009688;
+    font-size: 16px
+}
+.layui-layout-admin .layui-side {
+    top: 90px;
+    width: 200px;
+    overflow-x: hidden
+}
+
+
+.layui-nav-tree .layui-nav-item  a:hover div {
+    background-color: #f27cb4;
+    color: #fff;
+}
+
+.layui-nav * {
+    font-size: 18px;
+    color: #666666;
+}
+
+    .layui-nav * a:hover {
+        font-size: 18px;
+        color: #ffffff;
+    }
+.layui-nav-tree .layui-nav-item a:hover {
+    color: #ffffff;
+}
+.homefont {color:#fff;
+}
+.layui-nav .layui-nav-more {
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid dashed dashed;
+    border-color: #666 transparent transparent;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all .2s;
+    -webkit-transition: all .2s;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    margin-top: -3px;
+    border-width: 6px;
+  /*   border-top-color:rgba(255,255,255,.7) */
+}
+.layui-nav .layui-nav-mored,
+.layui-nav-itemed > a .layui-nav-more {
+    margin-top: -9px;
+    /*! border-style:dashed dashed solid; */ border-color: transparent transparent #666;
+}
+/*.layui-nav-tree .layui-nav-item a:hover {
+    background-color: #f27cb4
+}*/
+.layui-nav-tree .layui-nav-item a:hover {
+    background-color: #f27cb4
+}
+.layui-nav-tree .layui-nav-bar {
+    width: 5px;
+    height: 0;
+    background-color: #f27cb4
+}
+.layui-nav-tree .layui-nav-item {
+    display: block;
+    width: 100%;
+    line-height: 50px;
+    /*! height: 50px; */
+}
+#mesagehandle a {
+    color: #999999;
+    text-decoration: none
+}
+#Doctorcommunicated a {
+    color: #999999;
+    text-decoration: none
+}
+.layui-form-label1 {
+    float: left;
+    display: block;
+    padding: 9px 15px;
+    width: 80px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: right
+}
+
+/*.layui-table-cell p:nth-child(1) {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+*/

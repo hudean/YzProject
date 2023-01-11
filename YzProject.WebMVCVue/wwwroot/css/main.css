@@ -1,0 +1,42 @@
+﻿* {
+    padding: 0;
+    margin: 0;
+    outline: none;
+    box-sizing: border-box;
+}
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+#app {
+    height: 100%;
+    padding: 3px;
+}
+.el-header{
+    background-color: #B3C0D1;
+    text-align: center;
+    height:100%;
+}
+.el-aside {
+    background-color: #D3DCE6;
+    text-align: left;
+    height: 100%;
+   
+}
+
+.el-main {
+    background-color: #E9EEF3;
+    text-align: center;
+    height: 100%;
+    -webkit-transition: margin-left 0.2s ease-in-out;
+    transition: margin-left 0.2s ease-in-out;
+}
+.el-container {
+    height:100%;
+}
+
+.main_toggle {
+    margin-left: -166px;
+}
+

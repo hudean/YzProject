@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\YzProject.Common\YzProject.Common.csproj" />
+    <ProjectReference Include="..\YzProject.Domain\YzProject.Domain.csproj" />
+    <ProjectReference Include="..\YzProject.Repository.Contract\YzProject.Repository.Contract.csproj" />
+  </ItemGroup>
+
+</Project>

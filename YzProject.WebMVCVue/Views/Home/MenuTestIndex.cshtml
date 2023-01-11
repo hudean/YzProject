@@ -1,0 +1,247 @@
+﻿@using System.Linq
+@using YzProject.WebMVCVue.Models
+@model List<DemoMenu>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Index</title>
+    <link rel="stylesheet" href="~/css/main.css" />
+    <link rel="stylesheet" href="~/lib/element-ui/theme-chalk/index.css" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="~/lib/vue/vue.js"></script>
+    <script type="text/javascript" src="~/lib/element-ui/index.js"></script>
+</head>
+<body>
+    <div id="app">
+        <el-container>
+            <el-header>
+                <div style=" width: 230px; height: 50px; text-align: center;
+                                    line-height: 60px; color: #fff; font-size: 20px;">
+                    <span class="big">@ViewData["system_name"]</span>
+                </div>
+                <div style="margin-top: -31px;  margin-left: 250px; width:100px; text-align:left;">
+                    <span @@click="menuToggle">
+                        <i class="el-icon-menu"></i>
+                    </span>
+                    <el-button size="small"
+                               @@click="addTab(editableTabsValue)">
+                        add tab
+                    </el-button>
+                </div>
+               
+                <div style="margin-top: -24px;  margin-left: 330px; text-align:right;">
+                    当前用户：{{username}}
+                </div>
+            </el-header>
+            <el-container>
+                <el-aside width="230px">
+                    <el-menu default-active="2"
+                             class="el-menu-vertical-demo"
+                             @@open="handleOpen"
+                             @@close="handleClose"
+                             background-color="#222d32"
+                             text-color="#fff"
+                             active-text-color="#ffd04b"
+                             style="height:100%;"
+                             :collapse="isCollapse">
+                        @foreach (var item in Model)
+                        {
+                            @if (item.path.Contains("/") && item.parentId == "0")
+                            {
+                                <el-menu-item index="@item.name" @@click="addTab('@item.title','@item.path','@item.name')">
+                                    <i class="@item.icon"></i>
+                                    <span slot="title">@item.title</span>
+                                </el-menu-item>
+                            }
+                            else if (item.parentId == "0")
+                            {
+                                <el-submenu index="@item.name">
+                                    <template slot="title">
+                                        <i class="@item.icon"></i>
+                                        <span slot="title">@item.title</span>
+                                    </template>
+                                    @{
+                                        var childMenu = Model.Where<DemoMenu>(m => m.parentId == item.id);
+                                    }
+                                    @foreach (var item2 in childMenu)
+                                    {
+                                        if (item2.path.Contains("/"))
+                                        {
+                                            <el-menu-item index="@item2.name" @@click="addTab('@item2.title','@item2.path','@item2.name')">
+                                                <i class="@item2.icon"></i>
+                                                <span slot="title">@item2.title</span>
+                                            </el-menu-item>
+                                        }
+                                        else
+                                        {
+                                            <el-submenu index="@item2.name">
+                                                <template slot="title">
+                                                    <i class="@item2.icon"></i>
+                                                    <span slot="title">@item2.title</span>
+                                                </template>
+                                                @{
+                                                    var childMenu2 = Model.Where<DemoMenu>(m => m.parentId == item2.id);
+                                                }
+                                                @foreach (var item3 in childMenu2)
+                                                {
+                                                    <el-menu-item index="@item3.name">
+                                                        <i class="@item3.icon"></i>
+                                                        <span slot="title">@item3.title</span>
+                                                    </el-menu-item>
+                                                }
+                                            </el-submenu>
+                                        }
+                                    }
+                                </el-submenu>
+                            }
+                        }
+                    </el-menu>
+                </el-aside>
+                <el-main v-bind:class="{main_toggle:isCollapse}">
+                    @*<el-tabs v-model="tabsIndex" type="border-card" closable 
+                    @@tab-remove="removeTab" 
+                    style="height:100%;min-width:900px;">
+                        <el-tab-pane v-for="(item,index) in tabsData" :key="item.name" :lable="item.title" :name="item.name" style="height:100%;">
+                            <div :id="'tab_'+item.name"></div>
+                            <component :is="item.content" :ref="item.name" :tabIndex="item.name">
+
+                            </component>
+                        </el-tab-pane>
+                      
+                    </el-tabs>*@
+                    <el-tabs v-model="editableTabsValue" type="border-card" closable style="height:100%;min-width:900px;" @@tab-remove="removeTab">
+                        <el-tab-pane v-for="(item, index) in editableTabs"
+                                     :key="item.name"
+                                     :label="item.title"
+                                     :name="item.name"
+                                     style="height:100%;">
+                            {{item.content}}
+                            @*<component :is="index_3" :ref="item.name" :tabIndex="item.name">
+
+                            </component>*@
+                        </el-tab-pane>
+                    </el-tabs>
+                </el-main>
+            </el-container>
+        </el-container>
+    </div>
+</body>
+</html>
+<script>
+    var app = new Vue({
+        el: "#app",
+        components: {
+            //comp1: () => import("./comp1.vue"),
+            //comp2: () => import("./comp2.vue")
+            //comp1: () => import("./Home/Index3.cshtml"),
+        },
+        data: {
+            isCollapse: false,
+            username: '@Html.Raw(ViewData["username"])',
+            tabsData: [{
+                name: "1",
+                title: 'tab 1',
+                content: null//table_s
+            }],
+            tabsIndex: "1",
+            editableTabsValue: '2',
+            editableTabs: [{
+                title: 'Tab 1',
+                name: '1',
+                content: 'Tab 1 content'
+            }, {
+                title: 'Tab 2',
+                name: '2',
+                content: 'Tab 2 content'
+            }],
+            tabIndex: 2
+        },
+        methods: {
+            handleOpen(key, keyPath) {
+                console.log(key, keyPath);
+            },
+            handleClose(key, keyPath) {
+                console.log(key, keyPath);
+            },
+            menuToggle() {
+                if (this.isCollapse) {
+
+                    this.isCollapse = false;
+                } else {
+
+                    this.isCollapse = true;
+                }
+            },
+            addTab(title,path,name){
+                console.log(title + "," + path + "," + name);
+                let flag = false;
+                let tabs = this.tabsData;
+                var that = this;
+                for(let tab of tabs){
+                    if (tab.name === name) {
+                        this.tabsIndex = name;
+                        flag =true;
+                        return false;
+                    }
+                }
+                if(!flag){
+                    this.tabsData.push({
+                        name: name,
+                        title: title,
+                        content: null
+                    });
+                    this.tabsIndex = name;
+                    $.post(path,function (result){
+                        $("#tab_"+name).html(result);
+                        that.tabsData[that.tabsData.length-1].content=eval(name);
+                    })
+                }
+            },
+            addTab(targetName) {
+                let newTabName = ++this.tabIndex + '';
+                this.editableTabs.push({
+                    title: 'New Tab',
+                    name: newTabName,
+                    content: 'New Tab content'
+                });
+                this.editableTabsValue = newTabName;
+            },
+            removeTab(targetName){
+                //let tabs = this.tabsData;
+                //let activeName = this.tabsIndex;
+                //if (activeName == targetName){
+                //    tabs.forEach((tab, index) => {
+                //        if (tab.name == targetName) {
+                //            let nextTab = tabs[index + 1] || tabs[index - 1];
+                //            if (nextTab) {
+                //                activeName = nextTab.name;
+                //            }
+                //        }
+                //    });
+                //}
+                //this.tabsIndex=activeName;
+                //this.tabsData = tabs.filter(tab => tab.name !== targetName);
+                let tabs = this.editableTabs;
+                let activeName = this.editableTabsValue;
+                if (activeName === targetName) {
+                    tabs.forEach((tab, index) => {
+                        if (tab.name === targetName) {
+                            let nextTab = tabs[index + 1] || tabs[index - 1];
+                            if (nextTab) {
+                                activeName = nextTab.name;
+                            }
+                        }
+                    });
+                }
+
+                this.editableTabsValue = activeName;
+                this.editableTabs = tabs.filter(tab => tab.name !== targetName);
+            }
+        }
+    });
+</script>
