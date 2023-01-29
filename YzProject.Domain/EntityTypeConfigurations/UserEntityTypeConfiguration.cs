@@ -23,7 +23,7 @@ namespace YzProject.Domain.EntityTypeConfigurations
             builder.Property(b => b.Password).IsRequired().HasMaxLength(32).HasComment("密码");
             builder.Property(b => b.Name).HasMaxLength(32).HasComment("用户姓名");
             //builder.Property(b => b.NickName).HasMaxLength(32).HasComment("用户昵称");
-            builder.Property(b => b.HeadImgUrl).HasMaxLength(255).HasComment("头像");
+            builder.Property(b => b.HardImgUrl).HasMaxLength(255).HasComment("头像");
             builder.Property(b => b.ThumbnailHeadImgUrl).HasMaxLength(255).HasComment("头像缩略图");
             builder.Property(b => b.Birthday).HasComment("生日");
             builder.Property(b => b.EMail).IsRequired().HasMaxLength(32).HasComment("邮箱");
@@ -34,7 +34,7 @@ namespace YzProject.Domain.EntityTypeConfigurations
             builder.Property(b => b.CreateTime).IsRequired().HasColumnType("datetime").HasComment("创建日期");
             builder.Property(b => b.LastLoginTime).HasColumnType("datetime").HasComment("上一次登录时间");
             builder.Property(b => b.LoginTimes).IsRequired().HasDefaultValue(0).HasComment("登录次数");
-            builder.Property(b => b.DeptmentId).IsRequired().HasComment("部门id");
+            builder.Property(b => b.DepartmentId).IsRequired().HasComment("部门id");
             builder.Property(b => b.IsDeleted).IsRequired().HasDefaultValue(0).HasComment("是否删除");
             //builder.Property(b => b.IdentityCardCode).HasMaxLength(18).HasComment("身份证号码");
             //builder.Property(b => b.IdentityCardBacktUrl).HasMaxLength(255).HasComment("身份证背面");

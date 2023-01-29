@@ -28,6 +28,7 @@ layui.use(['form', 'table', 'upload', 'element', 'layer', 'jquery'], function ()
             height: 'full-210',
             toolbar: '#toolbarDemo',
             parseData: function (res) {
+                console.log(res);
                 return {
                     "code": res.code,
                     "msg": res.msg,
@@ -42,6 +43,11 @@ layui.use(['form', 'table', 'upload', 'element', 'layer', 'jquery'], function ()
                 { field: 'userName', title: '用户名称' },
                 { field: 'hardImgUrl', title: '用户头像' },
                 { field: 'createTime', title: '创建日期' },
+                { field: 'address', title: '地址', hide: true },
+                { field: 'birthday', title: '生日', hide: true },
+                { field: 'name', title: '真实姓名', hide: true },
+                { field: 'eMail', title: '邮箱', hide: true },
+                { field: 'introduction', title: '简介', hide: true },
                 { field: '', title: '操作', templet: '#operationTpl' }
             ]],
             done: function (res, curr, count) {
@@ -84,6 +90,10 @@ layui.use(['form', 'table', 'upload', 'element', 'layer', 'jquery'], function ()
                     content: $('#userEdit').html(),
                     success: function (layero, index) {
 
+                        //日期
+                        laydate.render({
+                            elem: '#birthday'
+                        });
 
                         //常规使用 - 普通图片上传
                         var uploadInst = upload.render({
@@ -123,16 +133,46 @@ layui.use(['form', 'table', 'upload', 'element', 'layer', 'jquery'], function ()
 
                         layero.addClass('layui-form');
                         layero.find('.layui-layer-btn0').attr('lay-filter', 'formVerify').attr('lay-submit', '');
-
+                        $.ajax({
+                            url: '/Department/GetAllDepartments',
+                            type: 'Post',
+                            async: false,
+                            dataType: 'json',
+                            success: function (res) {
+                                if (res.code === 0) {
+                                    $.each(res.data, function (index, item) {
+                                        $('#department').append(new Option(item.departmentName, item.id));
+                                    });
+                                }
+                                else {
+                                    layer.close(temindex);
+                                    layer.alert(res.msg);
+                                }
+                                form.render();
+                            }
+                        });
 
                         $("#userName").val(data.userName);
                         $("#hardImgUrl").attr("src", data.hardImgUrl);
+                        $("#name").val(data.name);
+                        $("#mobile").val(data.mobile);
+                        $("#address").val(data.address);
+                        $("#EMail").val(data.eMail);
+                        $("#birthday").val(data.birthday);
+                        $("#introduction").val(data.introduction);
+                        $("#department").val(data.departmentId);
                         form.render();
                     },
                     btn: ['保存', '取消'],
                     yes: function (index, layero) {
                         form.on("submit(formVerify)", function () {
                             var userName = $("#userName").val();
+                            var name = $("#name").val();
+                            var mobile = $("#mobile").val();
+                            var address = $("#address").val();
+                            var EMail = $("#EMail").val();
+                            var birthday = $("#birthday").val();
+                            var departmentId = $("#department").val();
                             //var passWord = $("#passWord").val();
                             //var confirmPassword = $("#confirmPassword").val();
 
@@ -145,6 +185,13 @@ layui.use(['form', 'table', 'upload', 'element', 'layer', 'jquery'], function ()
                             json.id = id;
                             json.hardImgUrl = data.hardImgUrl;
                             json.userName = userName;
+                            json.name = name;
+                            json.mobile = mobile;
+                            json.address = address;
+                            json.EMail = EMail;
+                            json.birthday = birthday;
+                            json.introduction = $("#introduction").val();
+                            json.departmentId = departmentId;
                             //json.passWord = passWord;
                             //json.confirmPassword = confirmPassword;
 
@@ -391,11 +438,24 @@ layui.use(['form', 'table', 'upload', 'element', 'layer', 'jquery'], function ()
     $("#btnadd").click(function () {
         var temindex = layer.open({
             type: 1,
-            area: ['700px', '600px'],
+            area: ['800px', '700px'],
             title: '新增',
             content: $('#user').html(),
             btn: ['保存', '取消'],
             success: function (layero, index) {
+                form.render();
+                //日期
+                laydate.render({
+                    elem: '#birthday'
+                });
+
+                editor = KindEditor.create('#introduction', {
+                    //注意kindeditor包里面自带的是一个ashx的一班处理程序 此处改为mvc的控制器方法
+                    //uploadJson: '@Url.Action("UploadEditorImg", "Article")',
+                    uploadJson: '/UploadFile/UploadEditorImg',
+                    allowFileManager: true,
+                    cssData: 'img {width:506px;text-align:center;margin:10px 10%;overflow: hidden;}',
+                });
 
                 //常规使用 - 普通图片上传
                 var uploadInst = upload.render({
@@ -437,6 +497,23 @@ layui.use(['form', 'table', 'upload', 'element', 'layer', 'jquery'], function ()
                 layero.addClass('layui-form');
                 layero.find('.layui-layer-btn0').attr('lay-filter', 'formVerify').attr('lay-submit', '');
 
+                $.ajax({
+                    url: '/Department/GetAllDepartments',
+                    type: 'Post',
+                    dataType: 'json',
+                    success: function (res) {
+                        if (res.code === 0) {
+                            $.each(res.data, function (index, item) {
+                                $('#department').append(new Option(item.departmentName, item.id));
+                            });
+                        }
+                        else {
+                            layer.close(temindex);
+                            layer.alert(res.msg);
+                        }
+                        form.render();
+                    }
+                });
             },
             yes: function (index, layero) {
                 let locked = false;
@@ -446,11 +523,27 @@ layui.use(['form', 'table', 'upload', 'element', 'layer', 'jquery'], function ()
                         var userName = $("#userName").val();
                         var passWord = $("#passWord").val();
                         var confirmPassword = $("#confirmPassword").val();
+                        var name = $("#name").val();
+                        var mobile = $("#mobile").val();
+                        var address = $("#address").val();
+                        var EMail = $("#EMail").val();
+                        var birthday = $("#birthday").val();
+                        var departmentId = $("#department").val();
+                        //实例化编辑器对象
+                        editor.sync();
+                        //获取编辑器中输入的内容，这里我使用了id选择器去得到textarea
                         var json = {};
                         json.userName = userName;
                         json.passWord = passWord;
                         json.confirmPassword = confirmPassword;
-                       
+
+                        json.name = name;
+                        json.mobile = mobile;
+                        json.address = address;
+                        json.EMail = EMail;
+                        json.birthday = birthday;
+                        json.introduction = $("#introduction").val();
+                        json.departmentId = departmentId;
 
                         $.ajax({
                             url: '/User/AddOrEditAsync',

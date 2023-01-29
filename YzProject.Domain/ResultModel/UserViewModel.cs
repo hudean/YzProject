@@ -24,7 +24,7 @@ namespace YzProject.Domain.ResultModel
         /// 头像
         /// </summary>
 
-        public string HeadImgUrl { get; set; }
+        public string HardImgUrl { get; set; }
 
         /// <summary>
         /// 头像缩略图
@@ -70,8 +70,8 @@ namespace YzProject.Domain.ResultModel
         /// <summary>
         /// 部门ID
         /// </summary>
-        public int DeptmentId { get; set; }
+        public int DepartmentId { get; set; }
 
-        public string DeptmentName { get; set; }
+        public string DepartmentName { get; set; }
     }
 }

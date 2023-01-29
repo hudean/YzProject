@@ -76,7 +76,7 @@ namespace YzProject.WebAPI
             {
                 var users = new User[]
               {
-                new User{ UserName="admin", Password=Encrypt.Md5Encrypt("@123qwe") , EMail="133@qq.com", DeptmentId=1,  Mobile="13788886939", Name="yz", CreateTime=DateTime.Now, CreateUserId=0, },
+                new User{ UserName="admin", Password=Encrypt.Md5Encrypt("@123qwe") , EMail="133@qq.com", DepartmentId=1,  Mobile="13788886939", Name="yz", CreateTime=DateTime.Now, CreateUserId=0, },
 
               };
                 context.Users.AddRange(users);

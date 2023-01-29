@@ -31,6 +31,8 @@ namespace YzProject.WebMVC.Controllers
             IConfiguration configuration)
         {
             _userService = userService;
+            _hostingEnv = hostingEnvironment;
+            _configuration = configuration; 
         }
 
         public IActionResult Index()
@@ -57,7 +59,7 @@ namespace YzProject.WebMVC.Controllers
         /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> AddOrEditAsync(ParamUser param)
-        {
+       {
             try
             {
                 if (await _userService.ExistAsync(param))
@@ -70,7 +72,7 @@ namespace YzProject.WebMVC.Controllers
                 }
                 //if (param.Id > 0)
                 //{
-                //    HttpContext.Session.SetString("UserId", param.Id.ToString());
+                //    HttpContext.Session.SetString("AddUserId", param.Id.ToString());
                 //    //可以用 automap强转
                 //    var user = await _userService.GetByIdAsync(param.Id);
                 //    if (user != null)
@@ -81,8 +83,8 @@ namespace YzProject.WebMVC.Controllers
                 //    return Json(_userService.BgError("失败，该用户不存在"));
                 //}
 
-                //var model = await _userService.InsertGetEntityAsync(param);
-                //HttpContext.Session.SetString("UserId", model.Id.ToString());
+                var model = await _userService.InsertOrUpdateAsync(param);
+                HttpContext.Session.SetString("AddUserId", model.Id.ToString());
                 return Json(_userService.BgOk("添加成功"));
             }
             catch (Exception ex)
@@ -186,13 +188,13 @@ namespace YzProject.WebMVC.Controllers
                 {
                     Directory.CreateDirectory(filePath);
                 }
-                var model = await _userService.DetailAsync(int.Parse(HttpContext.Session.GetString("UserId")));
+                var model = await _userService.GetUserAsync(int.Parse(HttpContext.Session.GetString("AddUserId")));
 
                 if (action == "edit")
                 {
-                    if (!string.IsNullOrEmpty(model.HeadImgUrl))
+                    if (!string.IsNullOrEmpty(model.HardImgUrl))
                     {
-                        var oldFileName = model.HeadImgUrl.Substring(model.HeadImgUrl.LastIndexOf("/") + 1);
+                        var oldFileName = model.HardImgUrl.Substring(model.HardImgUrl.LastIndexOf("/") + 1);
                         oldFileName = filePath + oldFileName;
                         //删除原图片
                         if (System.IO.File.Exists(oldFileName))
@@ -204,15 +206,15 @@ namespace YzProject.WebMVC.Controllers
 
                 filePath = filePath + $@"{newFileName}";//指定文件上传路径
                 fileUrl = fileUrl + $@"{newFileName}";//指定文件上传路径
-                model.HeadImgUrl = fileUrl;
-                //if (await _userService.InsertOrUpdateAsync(model))
-                //{
-                //    using (FileStream fs = System.IO.File.Create(filePath))//创建文件流
-                //    {
-                //        file.CopyTo(fs);//将上载文件的内容复制到目标流
-                //        fs.Flush();//清除此流的缓冲区并导致将任何缓冲数据写入
-                //    }
-                //}
+                model.HardImgUrl = fileUrl;
+                if (await _userService.EditUserAsync(model))
+                {
+                    using (FileStream fs = System.IO.File.Create(filePath))//创建文件流
+                    {
+                        file.CopyTo(fs);//将上载文件的内容复制到目标流
+                        fs.Flush();//清除此流的缓冲区并导致将任何缓冲数据写入
+                    }
+                }
                 return Json(_userService.BgOk("上传成功"));
             }
             catch (Exception ex)

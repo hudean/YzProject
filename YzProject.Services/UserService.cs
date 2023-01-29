@@ -64,7 +64,7 @@ namespace YzProject.Services
 
         
 
-        public async Task<bool> InsertOrUpdateAsync(ParamUser param)
+        public async Task<User> InsertOrUpdateAsync(ParamUser param)
         {
             return await _userRepository.InsertOrUpdateAsync(param);
         }
@@ -130,5 +130,17 @@ namespace YzProject.Services
         }
 
         #endregion
+
+        public async Task<User> GetUserAsync(int id)
+        {
+            return await _userRepository.FindAsync(id);
+        }
+
+        public async Task<bool> EditUserAsync(User user)
+        {
+             await _userRepository.UpdateAsync(user, true);
+            return true;
+        }
+
     }
 }

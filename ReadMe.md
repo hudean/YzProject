@@ -35,6 +35,10 @@ https://www.cnblogs.com/ElijahZeng/p/7609241.html
 https://www.cnblogs.com/Traveller-Lee/p/6940221.html
 https://www.cnblogs.com/xingboy/p/11052901.html
 
+Socket通信:注意粘包和分包的问题，可以使用CRC校验等方式
+https://www.cnblogs.com/ysyn/p/4030651.html
+https://blog.csdn.net/qq_36814598/article/details/116117808
+
 
 这几个协议通信服务，可以使用事件总线（消息队列）订阅一些下发设备（客户端）的消息命令进行下发，
 设备（客户端）上报的信息可以发布对应的消息队列里做最后的处理，当然你也可以直接在本服务里处理设备（客户端）上传的信息

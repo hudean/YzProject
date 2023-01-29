@@ -20,9 +20,13 @@ namespace YzProject.Services.Contract
         Task<bool> ExistAsync(ParamUser param);
         Task<List<UserViewModel>> GetAllListAsync();
         Task<PaginatedList<UserViewModel>> GetPaginatedListAsync(string userName, int pageIndex, int pageSize);
-        Task<bool> InsertOrUpdateAsync(ParamUser param);
+        Task<User> InsertOrUpdateAsync(ParamUser param);
         Task<User> GetUserByUserNameAsync(string userName);
         Task<bool> EditPassWordAsync(ParamUserPassword param);
+
+        Task<User> GetUserAsync(int id);
+
+        Task<bool> EditUserAsync(User user);
 
         #region jwt
 

@@ -42,9 +42,14 @@ namespace YzProject.Domain.RequestModel
         public string Mobile { get; set; }
 
         /// <summary>
-        /// 备注
+        /// 
         /// </summary>
-        public string Remarks { get; set; }
+        public DateTime Birthday { get; set; }
+
+        /// <summary>
+        /// 简介
+        /// </summary>
+        public string Introduction { get; set; }
 
         /// <summary>
         /// 创建人
@@ -54,7 +59,15 @@ namespace YzProject.Domain.RequestModel
         /// <summary>
         /// 部门ID
         /// </summary>
-        public int DeptmentId { get; set; }
+        public int DepartmentId { get; set; }
+
+        /// <summary>
+        /// 头像
+        /// </summary>
+        public string HardImgUrl { get; set; }
+
+
+        public string Address { get; set; }
 
     }
 

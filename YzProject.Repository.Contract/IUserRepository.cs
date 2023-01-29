@@ -18,7 +18,7 @@ namespace YzProject.Repository.Contract
         Task<UserViewModel> DetailAsync(int id);
         Task<List<UserViewModel>> GetAllListAsync();
         Task<PaginatedList<UserViewModel>> GetPaginatedListAsync(string userName, int pageIndex, int pageSize);
-        Task<bool> InsertOrUpdateAsync(ParamUser param);
+        Task<User> InsertOrUpdateAsync(ParamUser param);
         Task<User> GetUserByUserNameAsync(string userName);
 
         #region jwt

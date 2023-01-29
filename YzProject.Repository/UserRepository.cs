@@ -51,22 +51,22 @@ namespace YzProject.Repository
         public async Task<UserViewModel> DetailAsync(int id)
         {
             var data = await (from u in _dbContext.Users.Where(x => x.Id == id)
-                              join d in _dbContext.Departments on u.DeptmentId equals d.Id
+                              join d in _dbContext.Departments on u.DepartmentId equals d.Id
                               select new UserViewModel
                               {
                                   Id = u.Id,
                                   UserName = u.UserName,
                                   CreateTime = u.CreateTime,
                                   CreateUserId = u.CreateUserId,
-                                  DeptmentId = u.DeptmentId,
-                                  DeptmentName = d.DepartmentName,
+                                  DepartmentId = u.DepartmentId,
+                                  DepartmentName = d.DepartmentName,
                                   EMail = u.EMail,
                                   Mobile = u.Mobile,
                                   Name = u.Name,
                                   Introduction = u.Introduction,
                                   Address = u.Address,
                                   Birthday = u.Birthday,
-                                  HeadImgUrl = u.HeadImgUrl,
+                                  HardImgUrl = u.HardImgUrl,
                                   ThumbnailHeadImg = u.ThumbnailHeadImgUrl,
 
                               }).FirstOrDefaultAsync();
@@ -101,11 +101,17 @@ namespace YzProject.Repository
                             Id = r.Id,
                             CreateTime = r.CreateTime,
                             CreateUserId = r.CreateUserId,
-                            HeadImgUrl =r.HeadImgUrl,
-                             Address=r.Address,
-                              Birthday = r.Birthday,
-                               DeptmentId = r.DeptmentId,
-                                UserName = r.UserName,
+                            HardImgUrl = r.HardImgUrl,
+                            Address = r.Address,
+                            Birthday = r.Birthday,
+                            DepartmentId = r.DepartmentId,
+                            UserName = r.UserName,
+                            DepartmentName = "",
+                            EMail = r.EMail,
+                            Introduction = r.Introduction,
+                            Mobile = r.Mobile,
+                            Name = r.Name,
+                            ThumbnailHeadImg = r.ThumbnailHeadImgUrl
                             //ContactNumber = r.ContactNumber,
                             //DepartmentCode = r.DepartmentCode,
                             //DepartmentManager = r.DepartmentManager,
@@ -128,42 +134,47 @@ namespace YzProject.Repository
             return user;
         }
 
-        public async Task<bool> InsertOrUpdateAsync(ParamUser param)
+        public async Task<User> InsertOrUpdateAsync(ParamUser param)
         {
+            User model; 
             if (param.Id > 0)
             {
-                var model = await _dbContext.Users.Where(r => r.Id == param.Id).FirstOrDefaultAsync();
+                model = await _dbContext.Users.Where(r => r.Id == param.Id).FirstOrDefaultAsync();
                 if (model == null)
                 {
-                    return false;
+                    return model;
                 }
-                //department.ParentId = param.ParentId;
-                //department.DepartmentCode = param.DepartmentCode;
-                //department.DepartmentName = param.DepartmentName;
-                //department.DepartmentManager = param.DepartmentManager;
-                //department.CreateUserId = param.CreateUserId;
-                //department.ContactNumber = param.ContactNumber;
-                //department.Remarks = param.Remarks;
+                model.DepartmentId = param.DepartmentId;
+                model.UserName = param.UserName;
+                model.Name = param.Name;
+                model.EMail = param.EMail;
+                model.Mobile = param.Mobile;
+                model.Birthday = param.Birthday;
+                model.Introduction = param.Introduction;
+                model.Address = param.Address;
+                //model.HeadImgUrl = param.HardImgUrl;
                 _dbContext.Users.Update(model);
             }
             else
             {
-                var model = new User()
+                 model = new User()
                 {
-                    //ParentId = param.ParentId,
-                    //DepartmentCode = param.DepartmentCode,
-                    //DepartmentName = param.DepartmentName,
-                    //DepartmentManager = param.DepartmentManager,
-                    //CreateUserId = param.CreateUserId,
-                    //ContactNumber = param.ContactNumber,
-                    //CreateTime = DateTime.Now,
-                    //IsDeleted = false,
-                    //Remarks = param.Remarks,
+                    DepartmentId = param.DepartmentId,
+                    UserName = param.UserName,
+                    Name = param.Name,
+                    EMail = param.EMail,
+                    Mobile = param.Mobile,
+                    Birthday = param.Birthday,
+                    Introduction = param.Introduction,
+                    Address = param.Address,
+                    CreateTime = DateTime.Now,
+                    Password= Encrypt.Md5Encrypt(param.Password),
+                     IsDeleted = false,
                 };
                 await _dbContext.Users.AddAsync(model);
             }
             int res = await _dbContext.SaveChangesAsync();
-            return res > 0;
+            return res > 0 ? model : null;
         }
 
 

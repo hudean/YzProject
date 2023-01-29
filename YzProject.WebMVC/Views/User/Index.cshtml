@@ -96,7 +96,58 @@
                         </div>
                     </div>
                 </div>
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">用户姓名</label>
+                    <div class="layui-input-block" style="width:515px">
+                        <input id="name"  maxlength="32" required lay-verify="required" class="layui-input" placeholder="请输入用户姓名" />
+                    </div>
+                </div>
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">手机号码</label>
+                    <div class="layui-input-block" style="width:515px">
+                        <input id="mobile"  maxlength="32" required lay-verify="required|phone" autocomplete="off"  class="layui-input" placeholder="请输入手机号码" />
+                    </div>
+                </div>
 
+                    <div class="layui-form-item">
+                    <label class="layui-form-label">所在地址</label>
+                    <div class="layui-input-block" style="width:515px">
+                        <input id="address"  maxlength="32" required lay-verify="required" class="layui-input" placeholder="请输入所在地址" />
+                    </div>
+                </div>
+
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">用户邮箱</label>
+                    <div class="layui-input-block" style="width:515px">
+                        <input id="EMail"  maxlength="32" required lay-verify="required|email" autocomplete="off" class="layui-input" placeholder="请输入用户邮箱" />
+                    </div>
+                </div>
+
+                 <div class="layui-form-item">
+                    <label class="layui-form-label">用户生日</label>
+                    <div class="layui-input-block" style="width:515px">
+                       @* <input id="birthday"  maxlength="32" required lay-verify="required" class="layui-input" placeholder="请输入用户生日" />*@
+                         <input type="text" name="date" id="birthday" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                   <div class="layui-form-item">
+                    <label class="layui-form-label">用户部门</label>
+                    <div class="layui-input-block" style="width:515px">
+                        <select id="department" lay-verify="required" lay-filter="department">
+                            <option value="">请选择</option>
+                        </select>
+                    </div>
+                </div>
+                   <div class="layui-form-item">
+                    <label class="layui-form-label">用户简介</label>
+                    <div class="layui-input-block" style="width:515px">
+                        @*<input id="introduction"  maxlength="32" required lay-verify="required" class="layui-input" placeholder="请输入用户简介" />*@
+                        @*<textarea id="introduction" maxlength="1000"  lay-verify="required" type="text" placeholder="输入个人简介" class="layui-textarea" style="width:515px"></textarea>*@
+                         <div>
+                        <textarea id="introduction" name="content" style="width:515px;height:300px;"></textarea>
+                    </div>
+                     </div>
+                </div>
             </form>
         </div>
     </script>
@@ -125,7 +176,55 @@
                         </div>
                     </div>
                 </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">用户姓名</label>
+                    <div class="layui-input-block" style="width:515px">
+                        <input id="name"  maxlength="32" required lay-verify="required" class="layui-input" placeholder="请输入用户姓名" />
+                    </div>
+                </div>
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">手机号码</label>
+                    <div class="layui-input-block" style="width:515px">
+                        <input id="mobile"  maxlength="32" required lay-verify="required|phone" autocomplete="off"  class="layui-input" placeholder="请输入手机号码" />
+                    </div>
+                </div>
 
+                    <div class="layui-form-item">
+                    <label class="layui-form-label">所在地址</label>
+                    <div class="layui-input-block" style="width:515px">
+                        <input id="address"  maxlength="32" required lay-verify="required" class="layui-input" placeholder="请输入所在地址" />
+                    </div>
+                </div>
+
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">用户邮箱</label>
+                    <div class="layui-input-block" style="width:515px">
+                        <input id="EMail"  maxlength="32" required lay-verify="required|email" autocomplete="off" class="layui-input" placeholder="请输入用户邮箱" />
+                    </div>
+                </div>
+
+                 <div class="layui-form-item">
+                    <label class="layui-form-label">用户生日</label>
+                    <div class="layui-input-block" style="width:515px">
+                         <input type="text" name="date" id="birthday" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">用户部门</label>
+                    <div class="layui-input-block" style="width:515px">
+                        <select id="department" lay-verify="required" lay-filter="department">
+                            <option value="">请选择</option>
+                        </select>
+                    </div>
+                </div>
+                   <div class="layui-form-item">
+                    <label class="layui-form-label">用户简介</label>
+                    <div class="layui-input-block" style="width:515px">
+                        
+                        <textarea id="introduction" maxlength="1000"  lay-verify="required" type="text" placeholder="输入个人简介" class="layui-textarea" style="width:515px"></textarea>
+                        
+                     </div>
+                </div>
             </form>
         </div>
     </script>
@@ -153,19 +252,21 @@
 
     <script type="text/html" id="setRoleHtml">
         <form class="layui-form" action="" id="setRoleFrom" style="margin-top:10px;margin-left:30px;">
-          @*  <div class="layui-form-item">
-                <input type="checkbox" name="" title="写作" lay-skin="primary" checked>
-                <input type="checkbox" name="" title="发呆" lay-skin="primary">
-                <input type="checkbox" name="" title="禁用" lay-skin="primary" disabled>
-                 <input type="checkbox" name="" title="写作" lay-skin="primary" checked>
-                <input type="checkbox" name="" title="发呆" lay-skin="primary">
-                <input type="checkbox" name="" title="禁用" lay-skin="primary" disabled>
-                 <input type="checkbox" name="" title="写作" lay-skin="primary" checked>
-                <input type="checkbox" name="" title="发呆" lay-skin="primary">
-            </div>*@
+            @*  <div class="layui-form-item">
+            <input type="checkbox" name="" title="写作" lay-skin="primary" checked>
+            <input type="checkbox" name="" title="发呆" lay-skin="primary">
+            <input type="checkbox" name="" title="禁用" lay-skin="primary" disabled>
+             <input type="checkbox" name="" title="写作" lay-skin="primary" checked>
+            <input type="checkbox" name="" title="发呆" lay-skin="primary">
+            <input type="checkbox" name="" title="禁用" lay-skin="primary" disabled>
+             <input type="checkbox" name="" title="写作" lay-skin="primary" checked>
+            <input type="checkbox" name="" title="发呆" lay-skin="primary">
+        </div>*@
         </form>
     </script>
 
 
     <script src="~/js/user.js?v=@DateTime.Now"></script>
+    <script src="~/lib/kindeditor/kindeditor-all.js?v=7"></script>
+    <script src="~/lib/kindeditor/lang/zh-CN.js"></script>
 }
