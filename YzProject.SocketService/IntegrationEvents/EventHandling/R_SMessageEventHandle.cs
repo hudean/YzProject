@@ -14,12 +14,12 @@ namespace YzProject.SocketService.IntegrationEvents.EventHandling
     public class R_SMessageEventHandle : IIntegrationEventHandler<R_SMessageEvent>
     {
 
-        private readonly AppSocketServer socketServer;
+        //private readonly AppSocketServer socketServer;
 
-        public R_SMessageEventHandle(AppSocketServer server)
-        {
-            this.socketServer = server;
-        }
+        //public R_SMessageEventHandle(AppSocketServer server)
+        //{
+        //    this.socketServer = server;
+        //}
 
         public async Task Handle(R_SMessageEvent @event)
         {
@@ -41,7 +41,7 @@ namespace YzProject.SocketService.IntegrationEvents.EventHandling
             var gb2312 = Encoding.GetEncoding("GB2312");
             var bts = Encoding.Convert(Encoding.UTF8, gb2312, bytes);
 
-            socketServer.SendMsg(@event.DeviceKey.ToUpper(), gb2312.GetString(bts), @event.DType, @event.MsgId);
+            //socketServer.SendMsg(@event.DeviceKey.ToUpper(), gb2312.GetString(bts), @event.DType, @event.MsgId);
             await Task.FromResult(true);
             //return await Task.FromResult(true);
         }

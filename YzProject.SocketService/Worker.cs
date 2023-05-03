@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using SuperSocket.SocketBase.Logging;
+//using SuperSocket.SocketBase.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +14,7 @@ namespace YzProject.SocketService
     public class Worker : BackgroundService
     {
         private readonly ILogger<Worker> _logger;
-        private AppSocketServer server;
+        //private AppSocketServer server;
         private readonly IApplicationLifetime _applicationLifetime;
         private bool isdispose = false;
         private Crypto crypto = new Crypto();
@@ -26,7 +26,7 @@ namespace YzProject.SocketService
             _logger = logger;
             _applicationLifetime = applicationLifetime;
             _loggerFactory = loggerFactory;
-            server = new AppSocketServer(logger, loggerFactory);
+           // server = new AppSocketServer(logger, loggerFactory);
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -72,12 +72,12 @@ namespace YzProject.SocketService
 
         public override void Dispose()
         {
-            if (!isdispose)
-            {
-                server.Dispose();
-                isdispose = true;
-                _applicationLifetime.StopApplication();
-            }
+            //if (!isdispose)
+            //{
+            //    server.Dispose();
+            //    isdispose = true;
+            //    _applicationLifetime.StopApplication();
+            //}
             base.Dispose();
         }
 
@@ -85,8 +85,8 @@ namespace YzProject.SocketService
         {
             try
             {
-                server.Start();
-                isdispose = false;
+                //server.Start();
+                //isdispose = false;
             }
             catch (Exception ex)
             {
