@@ -15,22 +15,36 @@ ASP.NET MVC文档 https://docs.microsoft.com/zh-cn/dotnet/architecture/modern-we
 
 .NET 文档  https://docs.microsoft.com/zh-cn/dotnet/core/extensions/custom-configuration-provider
 
-
 使用 JSON JavaScriptSerializer 进行序列化或反序列化时出错。字符串的长度超过了为 maxJsonLength 属性设置的值。
+
+```
 return Json(str);
+```
+
 改成
+
+```
  return new JsonResult()
  {
      Data = str,
      MaxJsonLength = int.MaxValue,
      ContentType = "application/json"
  };
+```
 
-
+```
  T类型是bool时josnStr 原数据格式是 "XXX":true 
  读取该节点var josn = jObject[nodeName].ToString();时
-  JsonConvert.DeserializeObject<T>(josn);会强转失败改用下面的
-  if (typeof(T).IsPrimitive || typeof(T) == typeof(string))
-                        {
-                            return (T)Convert.ChangeType(josn, typeof(T));
-                        }
+  JsonConvert.DeserializeObject<T>(josn);会强转失败
+```
+
+改用下面的
+
+```
+ if (typeof(T).IsPrimitive || typeof(T) == typeof(string))
+ {
+    return (T)Convert.ChangeType(josn, typeof(T));
+ }
+```
+
+

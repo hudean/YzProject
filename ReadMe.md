@@ -1,44 +1,56 @@
-1¡¢CommunicationServiceÎÄ¼ş¼ĞÏÂÊÇÍ¨ĞÅ·şÎñ
-	1)YzProject.MQTTService   WiFi2.4G MQTTĞ­ÒéÍ¨ĞÅ
-	2)YzProject.SocketService WiFi5.0G SocketĞ­ÒéÍ¨ĞÅ
-	3)YzProject.ZigbeeService ´®¿ÚÍ¨ĞÅ·şÎñ
-2¡¢EventBusÎÄ¼ş¼ĞÏÂÊÇÊÂ¼ş×ÜÏß·şÎñÒ²¿ÉÒÔÊ¹ÓÃnuget°üÀïmestransit/MassTransit µÄ´úÌæ 
-3¡¢YzProject.CommonÀïÃæÊÇÒ»Ğ©Í¨ÓÃµÄ¸¨Öú°ïÖúÀà£¨ÈçMD5¼ÓÃÜµÈµÈ£©
-4¡¢YzProject.DomainÁìÓò²ã£¨Ä¿Ç°ÊÇÆ¶ÑªÄ£ĞÍ£©
-5¡¢YzProject.EntityFrameworkCore efcoreÓëÊı¾İ¿âÁ¬½Ó´¦Àí
-6¡¢YzProject.Model Êı¾İ´«Êä¶ÔÏóDTO
-7¡¢YzProject.Redis redis»º´æ
-8¡¢YzProject.Repository ²Ö´¢²ã
-9¡¢YzProject.Services  ·şÎñ²ã ÒµÎñÂß¼­·şÎñ
-10¡¢YzProject.WebAPI ½Ó¿Ú²ã
-11¡¢YzProject.WebMVC ±íÏÖ²ã
-12¡¢YzProject.WebMVCVue vue+element±íÏÖ²ã(ÔİÊ±Ã»ÓĞÓÃÊ¹ÓÃ´¿Ç°¶Ë´úÌæ)
+#### 1ã€CommunicationServiceæ–‡ä»¶å¤¹ä¸‹æ˜¯é€šä¿¡æœåŠ¡
 
-MqttĞ­Òé(M2Mqtt¡¢MQTTnet¡¢M2MqttDotnetCore)ÍÆ¼öÓÃMQTTnet 4.0°æ±¾¸ú3.0°æ±¾ÓĞĞ©²»Ò»Ñù ¿´±ğÈËĞ´µÄÎÄÕÂµÃ×¢ÒâÏÂ
-¿ªÔ´´úÂëµØÖ·£ºhttps://github.com/dotnet/MQTTnet
-¹Ù·½demoµØÖ·£ºhttps://github.com/dotnet/MQTTnet/tree/master/Samples
-¹Ù·½ÎÄµµµØÖ·£ºhttps://github.com/dotnet/MQTTnet/wiki/Client
-https://www.cnblogs.com/weskynet/p/16441219.html (.net6 °æ±¾µÄMQTTnet 4.0ÒÔÉÏ°æ±¾¿´)ÍÆ¼ö
-ÏÂÃæµÄÎÄÕÂ´óÖÂ¿´ÁË£¬Ã»×ö²âÊÔ£¬²»±£Ö¤ÕıÈ·
+â€‹	1)YzProject.MQTTService   WiFi2.4G MQTTåè®®é€šä¿¡
+â€‹	2)YzProject.SocketService WiFi5.0G Socketåè®®é€šä¿¡
+â€‹	3)YzProject.ZigbeeService ä¸²å£é€šä¿¡æœåŠ¡
+
+#### 2ã€EventBusæ–‡ä»¶å¤¹ä¸‹æ˜¯äº‹ä»¶æ€»çº¿æœåŠ¡ä¹Ÿå¯ä»¥ä½¿ç”¨nugetåŒ…é‡Œmestransit/MassTransit çš„ä»£æ›¿ 
+
+#### 3ã€YzProject.Commoné‡Œé¢æ˜¯ä¸€äº›é€šç”¨çš„è¾…åŠ©å¸®åŠ©ç±»ï¼ˆå¦‚MD5åŠ å¯†ç­‰ç­‰ï¼‰
+
+#### 4ã€YzProject.Domainé¢†åŸŸå±‚ï¼ˆç›®å‰æ˜¯è´«è¡€æ¨¡å‹ï¼‰
+
+#### 5ã€YzProject.EntityFrameworkCore efcoreä¸æ•°æ®åº“è¿æ¥å¤„ç†
+
+#### 6ã€YzProject.Model æ•°æ®ä¼ è¾“å¯¹è±¡DTO
+
+#### 7ã€YzProject.Redis redisç¼“å­˜
+
+#### 8ã€YzProject.Repository ä»“å‚¨å±‚
+
+#### 9ã€YzProject.Services  æœåŠ¡å±‚ ä¸šåŠ¡é€»è¾‘æœåŠ¡
+
+#### 10ã€YzProject.WebAPI æ¥å£å±‚
+
+#### 11ã€YzProject.WebMVC è¡¨ç°å±‚
+
+#### 12ã€YzProject.WebMVCVue vue+elementè¡¨ç°å±‚(æš‚æ—¶æ²¡æœ‰ç”¨ä½¿ç”¨çº¯å‰ç«¯ä»£æ›¿)
+
+Mqttåè®®(M2Mqttã€MQTTnetã€M2MqttDotnetCore)æ¨èç”¨MQTTnet 4.0ç‰ˆæœ¬è·Ÿ3.0ç‰ˆæœ¬æœ‰äº›ä¸ä¸€æ · çœ‹åˆ«äººå†™çš„æ–‡ç« å¾—æ³¨æ„ä¸‹
+å¼€æºä»£ç åœ°å€ï¼šhttps://github.com/dotnet/MQTTnet
+å®˜æ–¹demoåœ°å€ï¼šhttps://github.com/dotnet/MQTTnet/tree/master/Samples
+å®˜æ–¹æ–‡æ¡£åœ°å€ï¼šhttps://github.com/dotnet/MQTTnet/wiki/Client
+https://www.cnblogs.com/weskynet/p/16441219.html (.net6 ç‰ˆæœ¬çš„MQTTnet 4.0ä»¥ä¸Šç‰ˆæœ¬çœ‹)æ¨è
+ä¸‹é¢çš„æ–‡ç« å¤§è‡´çœ‹äº†ï¼Œæ²¡åšæµ‹è¯•ï¼Œä¸ä¿è¯æ­£ç¡®
 https://www.cnblogs.com/weskynet/p/16441219.html
 https://www.twle.cn/t/19383
 https://www.cnblogs.com/kuige/articles/7724786.html
 https://www.cnblogs.com/luoocean/p/11232752.html
 https://blog.csdn.net/yuming/article/details/125834921
 
-MQTTĞ­ÒéÖĞÎÄ°æhttps://github.com/mcxiaoke/mqtt 
-MQTTÈëÃÅhttps://blog.csdn.net/u012692537/article/details/80263150 
-Ê¹ÓÃ MQTTnet ÊµÏÖ MQTT Í¨ĞÅÊ¾Àıhttps://blog.csdn.net/u012692537/article/details/80255010
+MQTTåè®®ä¸­æ–‡ç‰ˆhttps://github.com/mcxiaoke/mqtt 
+MQTTå…¥é—¨https://blog.csdn.net/u012692537/article/details/80263150 
+ä½¿ç”¨ MQTTnet å®ç° MQTT é€šä¿¡ç¤ºä¾‹https://blog.csdn.net/u012692537/article/details/80255010
 
-´®¿ÚÍ¨ĞÅ
+ä¸²å£é€šä¿¡
 https://www.cnblogs.com/ElijahZeng/p/7609241.html
 https://www.cnblogs.com/Traveller-Lee/p/6940221.html
 https://www.cnblogs.com/xingboy/p/11052901.html
 
-SocketÍ¨ĞÅ:×¢ÒâÕ³°üºÍ·Ö°üµÄÎÊÌâ£¬¿ÉÒÔÊ¹ÓÃCRCĞ£ÑéµÈ·½Ê½
+Socketé€šä¿¡:æ³¨æ„ç²˜åŒ…å’Œåˆ†åŒ…çš„é—®é¢˜ï¼Œå¯ä»¥ä½¿ç”¨CRCæ ¡éªŒç­‰æ–¹å¼
 https://www.cnblogs.com/ysyn/p/4030651.html
 https://blog.csdn.net/qq_36814598/article/details/116117808
 
 
-Õâ¼¸¸öĞ­ÒéÍ¨ĞÅ·şÎñ£¬¿ÉÒÔÊ¹ÓÃÊÂ¼ş×ÜÏß£¨ÏûÏ¢¶ÓÁĞ£©¶©ÔÄÒ»Ğ©ÏÂ·¢Éè±¸£¨¿Í»§¶Ë£©µÄÏûÏ¢ÃüÁî½øĞĞÏÂ·¢£¬
-Éè±¸£¨¿Í»§¶Ë£©ÉÏ±¨µÄĞÅÏ¢¿ÉÒÔ·¢²¼¶ÔÓ¦µÄÏûÏ¢¶ÓÁĞÀï×ö×îºóµÄ´¦Àí£¬µ±È»ÄãÒ²¿ÉÒÔÖ±½ÓÔÚ±¾·şÎñÀï´¦ÀíÉè±¸£¨¿Í»§¶Ë£©ÉÏ´«µÄĞÅÏ¢
+è¿™å‡ ä¸ªåè®®é€šä¿¡æœåŠ¡ï¼Œå¯ä»¥ä½¿ç”¨äº‹ä»¶æ€»çº¿ï¼ˆæ¶ˆæ¯é˜Ÿåˆ—ï¼‰è®¢é˜…ä¸€äº›ä¸‹å‘è®¾å¤‡ï¼ˆå®¢æˆ·ç«¯ï¼‰çš„æ¶ˆæ¯å‘½ä»¤è¿›è¡Œä¸‹å‘ï¼Œ
+è®¾å¤‡ï¼ˆå®¢æˆ·ç«¯ï¼‰ä¸ŠæŠ¥çš„ä¿¡æ¯å¯ä»¥å‘å¸ƒå¯¹åº”çš„æ¶ˆæ¯é˜Ÿåˆ—é‡Œåšæœ€åçš„å¤„ç†ï¼Œå½“ç„¶ä½ ä¹Ÿå¯ä»¥ç›´æ¥åœ¨æœ¬æœåŠ¡é‡Œå¤„ç†è®¾å¤‡ï¼ˆå®¢æˆ·ç«¯ï¼‰ä¸Šä¼ çš„ä¿¡æ¯

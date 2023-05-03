@@ -1,5 +1,10 @@
 ﻿解决redis经常超时掉线的问题
-1、项目文件csproj增加配置最小线程数，由原200 改为 1500： <ThreadPoolMinThreads>500</ThreadPoolMinThreads>
+1、项目文件csproj增加配置最小线程数，由原200 改为 1500：
+
+```
+ <ThreadPoolMinThreads>500</ThreadPoolMinThreads>
+```
+
 理由：跟踪RabbitMQ发现在瞬时状态下，未消费的消息会突然激增到2K-10K（重要）
 2、修改redis重连尝试，由3次改为10次
 3、修改redis KeepAlive 为 180秒
